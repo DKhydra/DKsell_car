@@ -20,8 +20,10 @@
     http://www.springframework.org/schema/aop/spring-aop.xsd
     http://www.springframework.org/schema/util
     http://www.springframework.org/schema/util/spring-util.xsd">
+
+
 	<!-- 自动将Service层注入 -->
-	<context:component-scan base-package="com.fnzb.service" />
+	<context:component-scan base-package="com.fnzb.service.Impl" />
 	<context:annotation-config />
 
 	<!-- jdbc配置 -->
@@ -33,6 +35,15 @@
 			</list>
 		</property>
 	</bean>
+
+
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<!--扫描包路径，如果需要扫描多个包，中间使用半角逗号隔开-->
+		<property name="basePackage" value="com.fnzb.dao.mapper" />
+		<!--这里不用sqlSessionFactory是因为如果用会导致上面配置的dataSource失效-->
+		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
+	</bean>
+
 	<!--<bean id="httpClientInvoker" class="com.rv.common.httpclient.HttpClientInvoker" />-->
 	<!--<bean id="ssoFilter" class="com.rv.filter.SsoFilter">-->
 		<!--<property name="urlExclusion" value="${sso.urlExclusion}" />-->
