@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fnzb.dao.mapper.AuctionExamineMapper" >
+  <resultMap id="BaseResultMap" type="com.fnzb.dao.entity.AuctionExamine" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="auction_id" property="auctionId" jdbcType="BIGINT" />
+    <result column="is_auditing" property="isAuditing" jdbcType="TINYINT" />
+    <result column="reason" property="reason" jdbcType="VARCHAR" />
+    <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
+    <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, auction_id, is_auditing, reason, gmt_create, gmt_modified
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from sc_auction_examine
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from sc_auction_examine
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.fnzb.dao.entity.AuctionExamine" >
+    insert into sc_auction_examine (id, auction_id, is_auditing, 
+      reason, gmt_create, gmt_modified
+      )
+    values (#{id,jdbcType=BIGINT}, #{auctionId,jdbcType=BIGINT}, #{isAuditing,jdbcType=TINYINT}, 
+      #{reason,jdbcType=VARCHAR}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.fnzb.dao.entity.AuctionExamine" >
+    insert into sc_auction_examine
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="auctionId != null" >
+        auction_id,
+      </if>
+      <if test="isAuditing != null" >
+        is_auditing,
+      </if>
+      <if test="reason != null" >
+        reason,
+      </if>
+      <if test="gmtCreate != null" >
+        gmt_create,
+      </if>
+      <if test="gmtModified != null" >
+        gmt_modified,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="auctionId != null" >
+        #{auctionId,jdbcType=BIGINT},
+      </if>
+      <if test="isAuditing != null" >
+        #{isAuditing,jdbcType=TINYINT},
+      </if>
+      <if test="reason != null" >
+        #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="gmtCreate != null" >
+        #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null" >
+        #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fnzb.dao.entity.AuctionExamine" >
+    update sc_auction_examine
+    <set >
+      <if test="auctionId != null" >
+        auction_id = #{auctionId,jdbcType=BIGINT},
+      </if>
+      <if test="isAuditing != null" >
+        is_auditing = #{isAuditing,jdbcType=TINYINT},
+      </if>
+      <if test="reason != null" >
+        reason = #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="gmtCreate != null" >
+        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null" >
+        gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fnzb.dao.entity.AuctionExamine" >
+    update sc_auction_examine
+    set auction_id = #{auctionId,jdbcType=BIGINT},
+      is_auditing = #{isAuditing,jdbcType=TINYINT},
+      reason = #{reason,jdbcType=VARCHAR},
+      gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
