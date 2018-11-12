@@ -35,7 +35,7 @@ public class Auction extends AuctionKey {
 
     private Date vehicleTaxTime;
 
-    private Date plateNumber;
+    private Integer plateNumber;
 
     private String remarks;
 
@@ -58,6 +58,8 @@ public class Auction extends AuctionKey {
     private Integer browsingVolume;
 
     private Long auctionRange;
+
+    private Byte isSuccess;
 
     private static final long serialVersionUID = 1L;
 
@@ -189,11 +191,11 @@ public class Auction extends AuctionKey {
         this.vehicleTaxTime = vehicleTaxTime;
     }
 
-    public Date getPlateNumber() {
+    public Integer getPlateNumber() {
         return plateNumber;
     }
 
-    public void setPlateNumber(Date plateNumber) {
+    public void setPlateNumber(Integer plateNumber) {
         this.plateNumber = plateNumber;
     }
 
@@ -283,5 +285,13 @@ public class Auction extends AuctionKey {
 
     public void setAuctionRange(Long auctionRange) {
         this.auctionRange = auctionRange;
+    }
+
+    public Byte getIsSuccess() {
+        return isSuccess;
+    }
+
+    public void setIsSuccess(Byte isSuccess) {
+        this.isSuccess = isSuccess;
     }
 }

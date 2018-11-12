@@ -3,6 +3,8 @@ package com.fnzb.dao.mapper;
 import com.fnzb.dao.entity.Auction;
 import com.fnzb.dao.entity.AuctionKey;
 
+import java.util.List;
+
 public interface AuctionMapper {
     int deleteByPrimaryKey(AuctionKey key);
 
@@ -15,4 +17,6 @@ public interface AuctionMapper {
     int updateByPrimaryKeySelective(Auction record);
 
     int updateByPrimaryKey(Auction record);
+
+    List<Auction> findAll();
 }
