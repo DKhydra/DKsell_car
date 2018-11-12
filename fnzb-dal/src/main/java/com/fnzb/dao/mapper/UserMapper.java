@@ -1,17 +1,25 @@
 package com.fnzb.dao.mapper;
 
 import com.fnzb.dao.entity.User;
+import com.fnzb.dao.entity.event.UserEvent;
+
+import java.util.List;
 
 public interface UserMapper {
-    int deleteByPrimaryKey(Long id);
 
-    int insert(User record);
+   User selectUserByOpenId(String openId);
 
-    int insertSelective(User record);
+   User selectUserByMobile(Long mobile);
 
-    User selectByPrimaryKey(Long id);
+   User selectUserByUser(User user);
 
-    int updateByPrimaryKeySelective(User record);
+   int updateUser(User user);
 
-    int updateByPrimaryKey(User record);
+   int insertUser(User user);
+
+   List<User> selectUserAll(UserEvent userEvent);
+
+   int selectUserCount(UserEvent userEvent);
+
+   int deleteUserById(List<Long> id);
 }

@@ -15,7 +15,7 @@ public class User {
 
     private String email;
 
-    private Long idNumber;
+    private String idNumber;
 
     private String realName;
 
@@ -80,11 +80,11 @@ public class User {
         this.email = email == null ? null : email.trim();
     }
 
-    public Long getIdNumber() {
+    public String getIdNumber() {
         return idNumber;
     }
 
-    public void setIdNumber(Long idNumber) {
+    public void setIdNumber(String idNumber) {
         this.idNumber = idNumber;
     }
 
