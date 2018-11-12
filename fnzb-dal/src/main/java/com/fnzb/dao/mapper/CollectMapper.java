@@ -2,16 +2,15 @@ package com.fnzb.dao.mapper;
 
 import com.fnzb.dao.entity.Collect;
 
+import java.util.List;
+
 public interface CollectMapper {
-    int deleteByPrimaryKey(Long id);
 
-    int insert(Collect record);
+    int inserCollect(Collect collect);
 
-    int insertSelective(Collect record);
+    int deleteCollectById(List<Long> id);
 
-    Collect selectByPrimaryKey(Long id);
+    Collect selectCollectById(Long id);
 
-    int updateByPrimaryKeySelective(Collect record);
-
-    int updateByPrimaryKey(Collect record);
+    List<Collect> selectCollectAll();
 }
