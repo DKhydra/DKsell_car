@@ -1,14 +1,18 @@
 package com.fnzb.web.controller;
 
 import com.fnzb.dao.entity.Auction;
+import com.fnzb.dao.entity.event.AuctionEvent;
+import com.fnzb.exception.XbaseError;
 import com.fnzb.result.ResultModel;
 import com.fnzb.service.AuctionService;
+import com.fnzb.spring.util.PageInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
@@ -30,12 +34,23 @@ public class AuctionController {
      * @param
      * @return
      */
-    @RequestMapping("/findAll")
+    @RequestMapping(value = "/findAll", method = RequestMethod.GET)
     @ResponseBody
-    public Map<String, Object> findAll(){
+    public Map<String, Object> findAll(AuctionEvent auctionEvent){
         ResultModel result = new ResultModel<>();
-        List<Auction> list  = auctionService.findAll();
-        System.out.println(list);
+//        ResultModel<PageInfo<Auction>> result = new ResultModel<>();
+        List<Auction> list  = auctionService.findAll(auctionEvent);
+//        int auctionCount = auctionService.findCountAuction(auctionEvent);
+//        if(auctionCount != 0){
+//            PageInfo<Auction> pageInfo = new PageInfo<>(list);
+//            pageInfo.setCurrentPage(auctionEvent.getPageIndex());
+//            pageInfo.setPageSize(auctionEvent.getPageSize());
+//            pageInfo.setTotal(auctionCount);
+//            result.setData(pageInfo);
+//        }else {
+//            result.setReturnMessage("查询为空");
+//            result.setReturnCode(XbaseError.SYS_DB_ERROR.getErrorCode());
+//        }
         result.setData(list);
         return result.dump();
     }

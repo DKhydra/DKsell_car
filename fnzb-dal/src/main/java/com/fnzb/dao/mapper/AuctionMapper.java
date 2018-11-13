@@ -2,7 +2,7 @@ package com.fnzb.dao.mapper;
 
 import com.fnzb.dao.entity.Auction;
 import com.fnzb.dao.entity.AuctionKey;
-
+import com.fnzb.dao.entity.event.AuctionEvent;
 import java.util.List;
 
 public interface AuctionMapper {
@@ -18,5 +18,7 @@ public interface AuctionMapper {
 
     int updateByPrimaryKey(Auction record);
 
-    List<Auction> findAll();
+    List<Auction> findAll(AuctionEvent auctionEvent);
+
+    int selectAuctionCount(AuctionEvent auctionEvent);
 }

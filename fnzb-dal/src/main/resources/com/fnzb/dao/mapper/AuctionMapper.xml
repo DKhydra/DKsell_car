@@ -400,10 +400,51 @@
       and engine_type = #{engineType,jdbcType=VARCHAR}
   </update>
 
-  <select id="findAll" resultMap="BaseResultMap">
+  <select id="findAll" resultMap="BaseResultMap" parameterType="com.fnzb.dao.entity.event.AuctionEvent">
     select
     <include refid="Base_Column_List" />
     from sc_auction
-    where is_auditing = 1 and is_success = 0
+    where
+      is_auditing = 1 and is_success = 0
+    <if test="holdSite != null" >
+      and hold_site = #{holdSite,jdbcType=VARCHAR}
+    </if>
+    <if test="trademark != null" >
+      and trademark = #{trademark,jdbcType=VARCHAR}
+    </if>
+    <if test="carType != null" >
+      and car_type in
+      <foreach collection="carType" index="index" item="item" open="(" separator="," close=")">
+         #{item,jdbcType=TINYINT}
+      </foreach>
+    </if>
+    <if test="accidentAcuse != null" >
+      and accident_acuse in
+      <foreach collection="accidentAcuse" index="index" item="item" open="(" separator="," close=")">
+        #{item,jdbcType=TINYINT}
+      </foreach>
+    </if>
+    order by auction_time ASC
+    limit #{rowIndex},#{pageSize}
   </select>
+
+  <select id="selectAuctionCount" parameterType="com.fnzb.dao.entity.event.AuctionEvent" resultType="java.lang.Integer">
+    select count(id)
+    from sc_auction
+    where
+    is_auditing = 1 and is_success = 0
+    <if test="holdSite != null" >
+      and hold_site = #{holdSite,jdbcType=VARCHAR}
+    </if>
+    <if test="trademark != null" >
+      and trademark = #{trademark,jdbcType=VARCHAR}
+    </if>
+    <if test="carType != null" >
+      and car_type = #{carType,jdbcType=TINYINT}
+    </if>
+    <if test="accidentAcuse != null" >
+      and accident_acuse = #{accidentAcuse,jdbcType=TINYINT}
+    </if>
+  </select>
+
 </mapper>
