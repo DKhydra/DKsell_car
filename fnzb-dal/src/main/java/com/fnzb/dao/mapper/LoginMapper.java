@@ -3,13 +3,15 @@ package com.fnzb.dao.mapper;
 import com.fnzb.dao.entity.Login;
 
 public interface LoginMapper {
+    int deleteByPrimaryKey(Long id);
 
-    int insertLogin(Login record);
+    int insert(Login record);
 
-    Login selectByLogin(Login login);
+    int insertSelective(Login record);
 
-    int update(Login login);
+    Login selectByPrimaryKey(Long id);
 
-    int selectByUserName(Long userName);
+    int updateByPrimaryKeySelective(Login record);
 
+    int updateByPrimaryKey(Login record);
 }

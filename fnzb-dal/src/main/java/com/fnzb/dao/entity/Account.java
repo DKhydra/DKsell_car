@@ -19,8 +19,6 @@ public class Account {
 
     private Date gmtModified;
 
-    private static final long serialVersionUID = 1L;
-
     public Long getId() {
         return id;
     }

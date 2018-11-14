@@ -7,8 +7,6 @@ public class User {
 
     private String openId;
 
-    private String nickName;
-
     private Long mobile;
 
     private String telephone;
@@ -23,14 +21,15 @@ public class User {
 
     private Byte isVerification;
 
+    private Long cityId;
+
+    private String city;
+
     private String userPicture;
 
     private Date gmtCreate;
 
     private Date gmtModified;
-
-    private static final long serialVersionUID = 1L;
-
 
     public Long getId() {
         return id;
@@ -46,14 +45,6 @@ public class User {
 
     public void setOpenId(String openId) {
         this.openId = openId == null ? null : openId.trim();
-    }
-
-    public String getNickName() {
-        return nickName;
-    }
-
-    public void setNickName(String nickName) {
-        this.nickName = nickName == null ? null : nickName.trim();
     }
 
     public Long getMobile() {
@@ -85,7 +76,7 @@ public class User {
     }
 
     public void setIdNumber(String idNumber) {
-        this.idNumber = idNumber;
+        this.idNumber = idNumber == null ? null : idNumber.trim();
     }
 
     public String getRealName() {
@@ -110,6 +101,22 @@ public class User {
 
     public void setIsVerification(Byte isVerification) {
         this.isVerification = isVerification;
+    }
+
+    public Long getCityId() {
+        return cityId;
+    }
+
+    public void setCityId(Long cityId) {
+        this.cityId = cityId;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city == null ? null : city.trim();
     }
 
     public String getUserPicture() {

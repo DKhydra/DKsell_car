@@ -1,94 +1,71 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.fnzb.dao.mapper.LoginMapper" >
-  <resultMap id="BaseResultMap" type="com.fnzb.dao.entity.Login" >
-    <id column="id" property="id" jdbcType="BIGINT" />
-    <result column="user_name" property="userName" jdbcType="BIGINT" />
-    <result column="password" property="password" jdbcType="VARCHAR" />
-    <result column="last_time" property="lastTime" jdbcType="TIMESTAMP" />
-    <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
-    <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fnzb.dao.mapper.LoginMapper">
+  <resultMap id="BaseResultMap" type="com.fnzb.dao.entity.Login">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="car_id" jdbcType="BIGINT" property="carId" />
+    <result column="mobile" jdbcType="BIGINT" property="mobile" />
   </resultMap>
-  <sql id="Base_Column_List" >
-    id, user_name, password, last_time, gmt_create, gmt_modified
+  <sql id="Base_Column_List">
+    id, car_id, mobile
   </sql>
-  <select id="selectByLogin" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from sc_user_login
+    from sc_whitelist
     where id = #{id,jdbcType=BIGINT}
   </select>
-  <insert id="insertLogin" parameterType="com.fnzb.dao.entity.Login" >
-    insert into sc_user_login (user_name, password,
-      last_time, gmt_create, gmt_modified
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from sc_whitelist
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.fnzb.dao.entity.Login">
+    insert into sc_whitelist (id, car_id, mobile
       )
-    values (#{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
-      #{lastTime,jdbcType=TIMESTAMP}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}
+    values (#{id,jdbcType=BIGINT}, #{carId,jdbcType=BIGINT}, #{mobile,jdbcType=BIGINT}
       )
   </insert>
-  <!--<insert id="insertSelective" parameterType="com.fnzb.dao.entity.Login" >-->
-    <!--insert into sc_user_login-->
-    <!--<trim prefix="(" suffix=")" suffixOverrides="," >-->
-      <!--<if test="id != null" >-->
-        <!--id,-->
-      <!--</if>-->
-      <!--<if test="userName != null" >-->
-        <!--user_name,-->
-      <!--</if>-->
-      <!--<if test="password != null" >-->
-        <!--password,-->
-      <!--</if>-->
-      <!--<if test="lastTime != null" >-->
-        <!--last_time,-->
-      <!--</if>-->
-      <!--<if test="gmtCreate != null" >-->
-        <!--gmt_create,-->
-      <!--</if>-->
-      <!--<if test="gmtModified != null" >-->
-        <!--gmt_modified,-->
-      <!--</if>-->
-    <!--</trim>-->
-    <!--<trim prefix="values (" suffix=")" suffixOverrides="," >-->
-      <!--<if test="id != null" >-->
-        <!--#{id,jdbcType=BIGINT},-->
-      <!--</if>-->
-      <!--<if test="userName != null" >-->
-        <!--#{userName,jdbcType=VARCHAR},-->
-      <!--</if>-->
-      <!--<if test="password != null" >-->
-        <!--#{password,jdbcType=VARCHAR},-->
-      <!--</if>-->
-      <!--<if test="lastTime != null" >-->
-        <!--#{lastTime,jdbcType=TIMESTAMP},-->
-      <!--</if>-->
-      <!--<if test="gmtCreate != null" >-->
-        <!--#{gmtCreate,jdbcType=TIMESTAMP},-->
-      <!--</if>-->
-      <!--<if test="gmtModified != null" >-->
-        <!--#{gmtModified,jdbcType=TIMESTAMP},-->
-      <!--</if>-->
-    <!--</trim>-->
-  <!--</insert>-->
-  <update id="update" parameterType="com.fnzb.dao.entity.Login" >
-    update sc_user_login
-    <set >
-      <if test="password != null" >
-        password = #{password,jdbcType=VARCHAR},
+  <insert id="insertSelective" parameterType="com.fnzb.dao.entity.Login">
+    insert into sc_whitelist
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
       </if>
-      <if test="lastTime != null" >
-        last_time = #{lastTime,jdbcType=TIMESTAMP},
+      <if test="carId != null">
+        car_id,
       </if>
-      <if test="gmtCreate != null" >
-        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      <if test="mobile != null">
+        mobile,
       </if>
-      <if test="gmtModified != null" >
-        gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="carId != null">
+        #{carId,jdbcType=BIGINT},
+      </if>
+      <if test="mobile != null">
+        #{mobile,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fnzb.dao.entity.Login">
+    update sc_whitelist
+    <set>
+      <if test="carId != null">
+        car_id = #{carId,jdbcType=BIGINT},
+      </if>
+      <if test="mobile != null">
+        mobile = #{mobile,jdbcType=BIGINT},
       </if>
     </set>
-    where user_name = #{userName,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
   </update>
-
-  <select id="selectByUserName" parameterType="java.lang.Long" resultType="java.lang.Long">
-    select id from sc_user_login where user_name = #{userName,jdbcType=BIGINT}
-  </select>
+  <update id="updateByPrimaryKey" parameterType="com.fnzb.dao.entity.Login">
+    update sc_whitelist
+    set car_id = #{carId,jdbcType=BIGINT},
+      mobile = #{mobile,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
 </mapper>

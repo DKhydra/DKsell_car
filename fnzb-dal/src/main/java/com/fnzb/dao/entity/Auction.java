@@ -1,11 +1,22 @@
 package com.fnzb.dao.entity;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
-public class Auction extends AuctionKey {
+public class Auction {
+    private Long id;
+
     private String name;
 
     private Date auctionTime;
+
+    private Long cityId;
+
+    private String city;
+
+    private String province;
+
+    private Long provinceId;
 
     private String holdSite;
 
@@ -17,15 +28,15 @@ public class Auction extends AuctionKey {
 
     private String colour;
 
-    private Long displacement;
-
-    private Byte accidentAcuse;
+    private BigDecimal displacement;
 
     private Byte gearBox;
 
     private String vinNo;
 
     private Date compulsoryInsurance;
+
+    private String engineType;
 
     private Date annualSurveyTime;
 
@@ -43,7 +54,7 @@ public class Auction extends AuctionKey {
 
     private String vehiclePicture;
 
-    private Long price;
+    private BigDecimal price;
 
     private Byte carType;
 
@@ -61,7 +72,19 @@ public class Auction extends AuctionKey {
 
     private Byte isSuccess;
 
-    private static final long serialVersionUID = 1L;
+    private Byte mileage;
+
+    private Byte carAge;
+
+    private Byte fuelType;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -77,6 +100,38 @@ public class Auction extends AuctionKey {
 
     public void setAuctionTime(Date auctionTime) {
         this.auctionTime = auctionTime;
+    }
+
+    public Long getCityId() {
+        return cityId;
+    }
+
+    public void setCityId(Long cityId) {
+        this.cityId = cityId;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city == null ? null : city.trim();
+    }
+
+    public String getProvince() {
+        return province;
+    }
+
+    public void setProvince(String province) {
+        this.province = province == null ? null : province.trim();
+    }
+
+    public Long getProvinceId() {
+        return provinceId;
+    }
+
+    public void setProvinceId(Long provinceId) {
+        this.provinceId = provinceId;
     }
 
     public String getHoldSite() {
@@ -119,20 +174,12 @@ public class Auction extends AuctionKey {
         this.colour = colour == null ? null : colour.trim();
     }
 
-    public Long getDisplacement() {
+    public BigDecimal getDisplacement() {
         return displacement;
     }
 
-    public void setDisplacement(Long displacement) {
+    public void setDisplacement(BigDecimal displacement) {
         this.displacement = displacement;
-    }
-
-    public Byte getAccidentAcuse() {
-        return accidentAcuse;
-    }
-
-    public void setAccidentAcuse(Byte accidentAcuse) {
-        this.accidentAcuse = accidentAcuse;
     }
 
     public Byte getGearBox() {
@@ -157,6 +204,14 @@ public class Auction extends AuctionKey {
 
     public void setCompulsoryInsurance(Date compulsoryInsurance) {
         this.compulsoryInsurance = compulsoryInsurance;
+    }
+
+    public String getEngineType() {
+        return engineType;
+    }
+
+    public void setEngineType(String engineType) {
+        this.engineType = engineType == null ? null : engineType.trim();
     }
 
     public Date getAnnualSurveyTime() {
@@ -223,11 +278,11 @@ public class Auction extends AuctionKey {
         this.vehiclePicture = vehiclePicture == null ? null : vehiclePicture.trim();
     }
 
-    public Long getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(Long price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
@@ -293,5 +348,29 @@ public class Auction extends AuctionKey {
 
     public void setIsSuccess(Byte isSuccess) {
         this.isSuccess = isSuccess;
+    }
+
+    public Byte getMileage() {
+        return mileage;
+    }
+
+    public void setMileage(Byte mileage) {
+        this.mileage = mileage;
+    }
+
+    public Byte getCarAge() {
+        return carAge;
+    }
+
+    public void setCarAge(Byte carAge) {
+        this.carAge = carAge;
+    }
+
+    public Byte getFuelType() {
+        return fuelType;
+    }
+
+    public void setFuelType(Byte fuelType) {
+        this.fuelType = fuelType;
     }
 }

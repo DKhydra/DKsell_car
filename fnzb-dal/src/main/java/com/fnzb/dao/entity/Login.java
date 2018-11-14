@@ -1,21 +1,11 @@
 package com.fnzb.dao.entity;
 
-import java.util.Date;
-
 public class Login {
     private Long id;
 
-    private Long userName;
+    private Long carId;
 
-    private String password;
-
-    private Date lastTime;
-
-    private Date gmtCreate;
-
-    private Date gmtModified;
-
-    private static final long serialVersionUID = 1L;
+    private Long mobile;
 
     public Long getId() {
         return id;
@@ -25,43 +15,19 @@ public class Login {
         this.id = id;
     }
 
-    public Long getUserName() {
-        return userName;
+    public Long getCarId() {
+        return carId;
     }
 
-    public void setUserName(Long userName) {
-        this.userName = userName;
+    public void setCarId(Long carId) {
+        this.carId = carId;
     }
 
-    public String getPassword() {
-        return password;
+    public Long getMobile() {
+        return mobile;
     }
 
-    public void setPassword(String password) {
-        this.password = password == null ? null : password.trim();
-    }
-
-    public Date getLastTime() {
-        return lastTime;
-    }
-
-    public void setLastTime(Date lastTime) {
-        this.lastTime = lastTime;
-    }
-
-    public Date getGmtCreate() {
-        return gmtCreate;
-    }
-
-    public void setGmtCreate(Date gmtCreate) {
-        this.gmtCreate = gmtCreate;
-    }
-
-    public Date getGmtModified() {
-        return gmtModified;
-    }
-
-    public void setGmtModified(Date gmtModified) {
-        this.gmtModified = gmtModified;
+    public void setMobile(Long mobile) {
+        this.mobile = mobile;
     }
 }

@@ -20,8 +20,6 @@ public class AuctionRecord {
 
     private BigDecimal bond;
 
-    private static final long serialVersionUID = 1L;
-
     public Long getId() {
         return id;
     }

@@ -7,8 +7,6 @@ public class Collect {
 
     private Long autionId;
 
-    private static final long serialVersionUID = 1L;
-
     public Long getId() {
         return id;
     }

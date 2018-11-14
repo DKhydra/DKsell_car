@@ -1,384 +1,452 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.fnzb.dao.mapper.AuctionMapper" >
-  <resultMap id="BaseResultMap" type="com.fnzb.dao.entity.Auction" >
-    <id column="id" property="id" jdbcType="BIGINT" />
-    <id column="engine_type" property="engineType" jdbcType="VARCHAR" />
-    <result column="name" property="name" jdbcType="VARCHAR" />
-    <result column="auction_time" property="auctionTime" jdbcType="TIMESTAMP" />
-    <result column="hold_site" property="holdSite" jdbcType="VARCHAR" />
-    <result column="trademark" property="trademark" jdbcType="VARCHAR" />
-    <result column="type" property="type" jdbcType="VARCHAR" />
-    <result column="number_plate" property="numberPlate" jdbcType="VARCHAR" />
-    <result column="colour" property="colour" jdbcType="VARCHAR" />
-    <result column="displacement" property="displacement" jdbcType="DECIMAL" />
-    <result column="accident_acuse" property="accidentAcuse" jdbcType="TINYINT" />
-    <result column="gear_box" property="gearBox" jdbcType="TINYINT" />
-    <result column="vin_no" property="vinNo" jdbcType="VARCHAR" />
-    <result column="compulsory_insurance" property="compulsoryInsurance" jdbcType="TIMESTAMP" />
-    <result column="annual_survey_time" property="annualSurveyTime" jdbcType="TIMESTAMP" />
-    <result column="key_number" property="keyNumber" jdbcType="BIGINT" />
-    <result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
-    <result column="vehicle_tax_time" property="vehicleTaxTime" jdbcType="TIMESTAMP" />
-    <result column="plate_number" property="plateNumber" jdbcType="INTEGER" />
-    <result column="remarks" property="remarks" jdbcType="VARCHAR" />
-    <result column="procedures_picture" property="proceduresPicture" jdbcType="VARCHAR" />
-    <result column="vehicle_picture" property="vehiclePicture" jdbcType="VARCHAR" />
-    <result column="price" property="price" jdbcType="DECIMAL" />
-    <result column="car_type" property="carType" jdbcType="TINYINT" />
-    <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
-    <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
-    <result column="auditing" property="auditing" jdbcType="BIGINT" />
-    <result column="is_auditing" property="isAuditing" jdbcType="TINYINT" />
-    <result column="browsing_volume" property="browsingVolume" jdbcType="INTEGER" />
-    <result column="auction_range" property="auctionRange" jdbcType="BIGINT" />
-    <result column="is_success" property="isSuccess" jdbcType="TINYINT" />
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fnzb.dao.mapper.AuctionMapper">
+  <resultMap id="BaseResultMap" type="com.fnzb.dao.entity.Auction">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="auction_time" jdbcType="TIMESTAMP" property="auctionTime" />
+    <result column="city_id" jdbcType="BIGINT" property="cityId" />
+    <result column="city" jdbcType="VARCHAR" property="city" />
+    <result column="province" jdbcType="VARCHAR" property="province" />
+    <result column="province_id" jdbcType="BIGINT" property="provinceId" />
+    <result column="hold_site" jdbcType="VARCHAR" property="holdSite" />
+    <result column="trademark" jdbcType="VARCHAR" property="trademark" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="number_plate" jdbcType="VARCHAR" property="numberPlate" />
+    <result column="colour" jdbcType="VARCHAR" property="colour" />
+    <result column="displacement" jdbcType="DECIMAL" property="displacement" />
+    <result column="gear_box" jdbcType="TINYINT" property="gearBox" />
+    <result column="vin_no" jdbcType="VARCHAR" property="vinNo" />
+    <result column="compulsory_insurance" jdbcType="DATE" property="compulsoryInsurance" />
+    <result column="engine_type" jdbcType="VARCHAR" property="engineType" />
+    <result column="annual_survey_time" jdbcType="TIMESTAMP" property="annualSurveyTime" />
+    <result column="key_number" jdbcType="BIGINT" property="keyNumber" />
+    <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
+    <result column="vehicle_tax_time" jdbcType="TIMESTAMP" property="vehicleTaxTime" />
+    <result column="plate_number" jdbcType="INTEGER" property="plateNumber" />
+    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+    <result column="procedures_picture" jdbcType="VARCHAR" property="proceduresPicture" />
+    <result column="vehicle_picture" jdbcType="VARCHAR" property="vehiclePicture" />
+    <result column="price" jdbcType="DECIMAL" property="price" />
+    <result column="car_type" jdbcType="TINYINT" property="carType" />
+    <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
+    <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
+    <result column="auditing" jdbcType="BIGINT" property="auditing" />
+    <result column="is_auditing" jdbcType="TINYINT" property="isAuditing" />
+    <result column="browsing_volume" jdbcType="INTEGER" property="browsingVolume" />
+    <result column="auction_range" jdbcType="BIGINT" property="auctionRange" />
+    <result column="is_success" jdbcType="TINYINT" property="isSuccess" />
+    <result column="mileage" jdbcType="TINYINT" property="mileage" />
+    <result column="car_age" jdbcType="TINYINT" property="carAge" />
+    <result column="fuel_type" jdbcType="TINYINT" property="fuelType" />
   </resultMap>
-  <sql id="Base_Column_List" >
-    id, engine_type, name, auction_time, hold_site, trademark, type, number_plate, colour, 
-    displacement, accident_acuse, gear_box, vin_no, compulsory_insurance, annual_survey_time, 
-    key_number, end_time, vehicle_tax_time, plate_number, remarks, procedures_picture, 
-    vehicle_picture, price, car_type, gmt_create, gmt_modified, auditing, is_auditing, 
-    browsing_volume, auction_range, is_success
+  <sql id="Base_Column_List">
+    id, name, auction_time, city_id, city, province, province_id, hold_site, trademark, 
+    type, number_plate, colour, displacement, gear_box, vin_no, compulsory_insurance, 
+    engine_type, annual_survey_time, key_number, end_time, vehicle_tax_time, plate_number, 
+    remarks, procedures_picture, vehicle_picture, price, car_type, gmt_create, gmt_modified, 
+    auditing, is_auditing, browsing_volume, auction_range, is_success, mileage, car_age, 
+    fuel_type
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.fnzb.dao.entity.AuctionKey" >
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from sc_auction
     where id = #{id,jdbcType=BIGINT}
-      and engine_type = #{engineType,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="com.fnzb.dao.entity.AuctionKey" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from sc_auction
     where id = #{id,jdbcType=BIGINT}
-      and engine_type = #{engineType,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="com.fnzb.dao.entity.Auction" >
-    insert into sc_auction (id, engine_type, name, 
-      auction_time, hold_site, trademark, 
+  <insert id="insert" parameterType="com.fnzb.dao.entity.Auction">
+    insert into sc_auction (id, name, auction_time, 
+      city_id, city, province, 
+      province_id, hold_site, trademark, 
       type, number_plate, colour, 
-      displacement, accident_acuse, gear_box, 
-      vin_no, compulsory_insurance, annual_survey_time, 
+      displacement, gear_box, vin_no, 
+      compulsory_insurance, engine_type, annual_survey_time, 
       key_number, end_time, vehicle_tax_time, 
       plate_number, remarks, procedures_picture, 
       vehicle_picture, price, car_type, 
       gmt_create, gmt_modified, auditing, 
-      is_auditing, browsing_volume, auction_range, is_success
-      )
-    values (#{id,jdbcType=BIGINT}, #{engineType,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
-      #{auctionTime,jdbcType=TIMESTAMP}, #{holdSite,jdbcType=VARCHAR}, #{trademark,jdbcType=VARCHAR}, 
+      is_auditing, browsing_volume, auction_range, 
+      is_success, mileage, car_age, 
+      fuel_type)
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{auctionTime,jdbcType=TIMESTAMP}, 
+      #{cityId,jdbcType=BIGINT}, #{city,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, 
+      #{provinceId,jdbcType=BIGINT}, #{holdSite,jdbcType=VARCHAR}, #{trademark,jdbcType=VARCHAR}, 
       #{type,jdbcType=VARCHAR}, #{numberPlate,jdbcType=VARCHAR}, #{colour,jdbcType=VARCHAR}, 
-      #{displacement,jdbcType=DECIMAL}, #{accidentAcuse,jdbcType=TINYINT}, #{gearBox,jdbcType=TINYINT}, 
-      #{vinNo,jdbcType=VARCHAR}, #{compulsoryInsurance,jdbcType=TIMESTAMP}, #{annualSurveyTime,jdbcType=TIMESTAMP}, 
+      #{displacement,jdbcType=DECIMAL}, #{gearBox,jdbcType=TINYINT}, #{vinNo,jdbcType=VARCHAR}, 
+      #{compulsoryInsurance,jdbcType=DATE}, #{engineType,jdbcType=VARCHAR}, #{annualSurveyTime,jdbcType=TIMESTAMP}, 
       #{keyNumber,jdbcType=BIGINT}, #{endTime,jdbcType=TIMESTAMP}, #{vehicleTaxTime,jdbcType=TIMESTAMP}, 
-      #{plateNumber,jdbcType=INTEGER}, #{remarks,jdbcType=VARCHAR}, #{proceduresPicture,jdbcType=VARCHAR},
+      #{plateNumber,jdbcType=INTEGER}, #{remarks,jdbcType=VARCHAR}, #{proceduresPicture,jdbcType=VARCHAR}, 
       #{vehiclePicture,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, #{carType,jdbcType=TINYINT}, 
       #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}, #{auditing,jdbcType=BIGINT}, 
-      #{isAuditing,jdbcType=TINYINT}, #{browsingVolume,jdbcType=INTEGER}, #{auctionRange,jdbcType=BIGINT},
-      #{isSuccess,jdbcType=TINYINT}
-      )
+      #{isAuditing,jdbcType=TINYINT}, #{browsingVolume,jdbcType=INTEGER}, #{auctionRange,jdbcType=BIGINT}, 
+      #{isSuccess,jdbcType=TINYINT}, #{mileage,jdbcType=TINYINT}, #{carAge,jdbcType=TINYINT}, 
+      #{fuelType,jdbcType=TINYINT})
   </insert>
-  <insert id="insertSelective" parameterType="com.fnzb.dao.entity.Auction" >
+  <insert id="insertSelective" parameterType="com.fnzb.dao.entity.Auction">
     insert into sc_auction
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
         id,
       </if>
-      <if test="engineType != null" >
-        engine_type,
-      </if>
-      <if test="name != null" >
+      <if test="name != null">
         name,
       </if>
-      <if test="auctionTime != null" >
+      <if test="auctionTime != null">
         auction_time,
       </if>
-      <if test="holdSite != null" >
+      <if test="cityId != null">
+        city_id,
+      </if>
+      <if test="city != null">
+        city,
+      </if>
+      <if test="province != null">
+        province,
+      </if>
+      <if test="provinceId != null">
+        province_id,
+      </if>
+      <if test="holdSite != null">
         hold_site,
       </if>
-      <if test="trademark != null" >
+      <if test="trademark != null">
         trademark,
       </if>
-      <if test="type != null" >
+      <if test="type != null">
         type,
       </if>
-      <if test="numberPlate != null" >
+      <if test="numberPlate != null">
         number_plate,
       </if>
-      <if test="colour != null" >
+      <if test="colour != null">
         colour,
       </if>
-      <if test="displacement != null" >
+      <if test="displacement != null">
         displacement,
       </if>
-      <if test="accidentAcuse != null" >
-        accident_acuse,
-      </if>
-      <if test="gearBox != null" >
+      <if test="gearBox != null">
         gear_box,
       </if>
-      <if test="vinNo != null" >
+      <if test="vinNo != null">
         vin_no,
       </if>
-      <if test="compulsoryInsurance != null" >
+      <if test="compulsoryInsurance != null">
         compulsory_insurance,
       </if>
-      <if test="annualSurveyTime != null" >
+      <if test="engineType != null">
+        engine_type,
+      </if>
+      <if test="annualSurveyTime != null">
         annual_survey_time,
       </if>
-      <if test="keyNumber != null" >
+      <if test="keyNumber != null">
         key_number,
       </if>
-      <if test="endTime != null" >
+      <if test="endTime != null">
         end_time,
       </if>
-      <if test="vehicleTaxTime != null" >
+      <if test="vehicleTaxTime != null">
         vehicle_tax_time,
       </if>
-      <if test="plateNumber != null" >
+      <if test="plateNumber != null">
         plate_number,
       </if>
-      <if test="remarks != null" >
+      <if test="remarks != null">
         remarks,
       </if>
-      <if test="proceduresPicture != null" >
+      <if test="proceduresPicture != null">
         procedures_picture,
       </if>
-      <if test="vehiclePicture != null" >
+      <if test="vehiclePicture != null">
         vehicle_picture,
       </if>
-      <if test="price != null" >
+      <if test="price != null">
         price,
       </if>
-      <if test="carType != null" >
+      <if test="carType != null">
         car_type,
       </if>
-      <if test="gmtCreate != null" >
+      <if test="gmtCreate != null">
         gmt_create,
       </if>
-      <if test="gmtModified != null" >
+      <if test="gmtModified != null">
         gmt_modified,
       </if>
-      <if test="auditing != null" >
+      <if test="auditing != null">
         auditing,
       </if>
-      <if test="isAuditing != null" >
+      <if test="isAuditing != null">
         is_auditing,
       </if>
-      <if test="browsingVolume != null" >
+      <if test="browsingVolume != null">
         browsing_volume,
       </if>
-      <if test="auctionRange != null" >
+      <if test="auctionRange != null">
         auction_range,
       </if>
-      <if test="isSuccess != null" >
+      <if test="isSuccess != null">
         is_success,
       </if>
+      <if test="mileage != null">
+        mileage,
+      </if>
+      <if test="carAge != null">
+        car_age,
+      </if>
+      <if test="fuelType != null">
+        fuel_type,
+      </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
         #{id,jdbcType=BIGINT},
       </if>
-      <if test="engineType != null" >
-        #{engineType,jdbcType=VARCHAR},
-      </if>
-      <if test="name != null" >
+      <if test="name != null">
         #{name,jdbcType=VARCHAR},
       </if>
-      <if test="auctionTime != null" >
+      <if test="auctionTime != null">
         #{auctionTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="holdSite != null" >
+      <if test="cityId != null">
+        #{cityId,jdbcType=BIGINT},
+      </if>
+      <if test="city != null">
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null">
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceId != null">
+        #{provinceId,jdbcType=BIGINT},
+      </if>
+      <if test="holdSite != null">
         #{holdSite,jdbcType=VARCHAR},
       </if>
-      <if test="trademark != null" >
+      <if test="trademark != null">
         #{trademark,jdbcType=VARCHAR},
       </if>
-      <if test="type != null" >
+      <if test="type != null">
         #{type,jdbcType=VARCHAR},
       </if>
-      <if test="numberPlate != null" >
+      <if test="numberPlate != null">
         #{numberPlate,jdbcType=VARCHAR},
       </if>
-      <if test="colour != null" >
+      <if test="colour != null">
         #{colour,jdbcType=VARCHAR},
       </if>
-      <if test="displacement != null" >
+      <if test="displacement != null">
         #{displacement,jdbcType=DECIMAL},
       </if>
-      <if test="accidentAcuse != null" >
-        #{accidentAcuse,jdbcType=TINYINT},
-      </if>
-      <if test="gearBox != null" >
+      <if test="gearBox != null">
         #{gearBox,jdbcType=TINYINT},
       </if>
-      <if test="vinNo != null" >
+      <if test="vinNo != null">
         #{vinNo,jdbcType=VARCHAR},
       </if>
-      <if test="compulsoryInsurance != null" >
-        #{compulsoryInsurance,jdbcType=TIMESTAMP},
+      <if test="compulsoryInsurance != null">
+        #{compulsoryInsurance,jdbcType=DATE},
       </if>
-      <if test="annualSurveyTime != null" >
+      <if test="engineType != null">
+        #{engineType,jdbcType=VARCHAR},
+      </if>
+      <if test="annualSurveyTime != null">
         #{annualSurveyTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="keyNumber != null" >
+      <if test="keyNumber != null">
         #{keyNumber,jdbcType=BIGINT},
       </if>
-      <if test="endTime != null" >
+      <if test="endTime != null">
         #{endTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="vehicleTaxTime != null" >
+      <if test="vehicleTaxTime != null">
         #{vehicleTaxTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="plateNumber != null" >
+      <if test="plateNumber != null">
         #{plateNumber,jdbcType=INTEGER},
       </if>
-      <if test="remarks != null" >
+      <if test="remarks != null">
         #{remarks,jdbcType=VARCHAR},
       </if>
-      <if test="proceduresPicture != null" >
+      <if test="proceduresPicture != null">
         #{proceduresPicture,jdbcType=VARCHAR},
       </if>
-      <if test="vehiclePicture != null" >
+      <if test="vehiclePicture != null">
         #{vehiclePicture,jdbcType=VARCHAR},
       </if>
-      <if test="price != null" >
+      <if test="price != null">
         #{price,jdbcType=DECIMAL},
       </if>
-      <if test="carType != null" >
+      <if test="carType != null">
         #{carType,jdbcType=TINYINT},
       </if>
-      <if test="gmtCreate != null" >
+      <if test="gmtCreate != null">
         #{gmtCreate,jdbcType=TIMESTAMP},
       </if>
-      <if test="gmtModified != null" >
+      <if test="gmtModified != null">
         #{gmtModified,jdbcType=TIMESTAMP},
       </if>
-      <if test="auditing != null" >
+      <if test="auditing != null">
         #{auditing,jdbcType=BIGINT},
       </if>
-      <if test="isAuditing != null" >
+      <if test="isAuditing != null">
         #{isAuditing,jdbcType=TINYINT},
       </if>
-      <if test="browsingVolume != null" >
+      <if test="browsingVolume != null">
         #{browsingVolume,jdbcType=INTEGER},
       </if>
-      <if test="auctionRange != null" >
+      <if test="auctionRange != null">
         #{auctionRange,jdbcType=BIGINT},
       </if>
-      <if test="isSuccess != null" >
+      <if test="isSuccess != null">
         #{isSuccess,jdbcType=TINYINT},
+      </if>
+      <if test="mileage != null">
+        #{mileage,jdbcType=TINYINT},
+      </if>
+      <if test="carAge != null">
+        #{carAge,jdbcType=TINYINT},
+      </if>
+      <if test="fuelType != null">
+        #{fuelType,jdbcType=TINYINT},
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.fnzb.dao.entity.Auction" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.fnzb.dao.entity.Auction">
     update sc_auction
-    <set >
-      <if test="name != null" >
+    <set>
+      <if test="name != null">
         name = #{name,jdbcType=VARCHAR},
       </if>
-      <if test="auctionTime != null" >
+      <if test="auctionTime != null">
         auction_time = #{auctionTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="holdSite != null" >
+      <if test="cityId != null">
+        city_id = #{cityId,jdbcType=BIGINT},
+      </if>
+      <if test="city != null">
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null">
+        province = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceId != null">
+        province_id = #{provinceId,jdbcType=BIGINT},
+      </if>
+      <if test="holdSite != null">
         hold_site = #{holdSite,jdbcType=VARCHAR},
       </if>
-      <if test="trademark != null" >
+      <if test="trademark != null">
         trademark = #{trademark,jdbcType=VARCHAR},
       </if>
-      <if test="type != null" >
+      <if test="type != null">
         type = #{type,jdbcType=VARCHAR},
       </if>
-      <if test="numberPlate != null" >
+      <if test="numberPlate != null">
         number_plate = #{numberPlate,jdbcType=VARCHAR},
       </if>
-      <if test="colour != null" >
+      <if test="colour != null">
         colour = #{colour,jdbcType=VARCHAR},
       </if>
-      <if test="displacement != null" >
+      <if test="displacement != null">
         displacement = #{displacement,jdbcType=DECIMAL},
       </if>
-      <if test="accidentAcuse != null" >
-        accident_acuse = #{accidentAcuse,jdbcType=TINYINT},
-      </if>
-      <if test="gearBox != null" >
+      <if test="gearBox != null">
         gear_box = #{gearBox,jdbcType=TINYINT},
       </if>
-      <if test="vinNo != null" >
+      <if test="vinNo != null">
         vin_no = #{vinNo,jdbcType=VARCHAR},
       </if>
-      <if test="compulsoryInsurance != null" >
-        compulsory_insurance = #{compulsoryInsurance,jdbcType=TIMESTAMP},
+      <if test="compulsoryInsurance != null">
+        compulsory_insurance = #{compulsoryInsurance,jdbcType=DATE},
       </if>
-      <if test="annualSurveyTime != null" >
+      <if test="engineType != null">
+        engine_type = #{engineType,jdbcType=VARCHAR},
+      </if>
+      <if test="annualSurveyTime != null">
         annual_survey_time = #{annualSurveyTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="keyNumber != null" >
+      <if test="keyNumber != null">
         key_number = #{keyNumber,jdbcType=BIGINT},
       </if>
-      <if test="endTime != null" >
+      <if test="endTime != null">
         end_time = #{endTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="vehicleTaxTime != null" >
+      <if test="vehicleTaxTime != null">
         vehicle_tax_time = #{vehicleTaxTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="plateNumber != null" >
+      <if test="plateNumber != null">
         plate_number = #{plateNumber,jdbcType=INTEGER},
       </if>
-      <if test="remarks != null" >
+      <if test="remarks != null">
         remarks = #{remarks,jdbcType=VARCHAR},
       </if>
-      <if test="proceduresPicture != null" >
+      <if test="proceduresPicture != null">
         procedures_picture = #{proceduresPicture,jdbcType=VARCHAR},
       </if>
-      <if test="vehiclePicture != null" >
+      <if test="vehiclePicture != null">
         vehicle_picture = #{vehiclePicture,jdbcType=VARCHAR},
       </if>
-      <if test="price != null" >
+      <if test="price != null">
         price = #{price,jdbcType=DECIMAL},
       </if>
-      <if test="carType != null" >
+      <if test="carType != null">
         car_type = #{carType,jdbcType=TINYINT},
       </if>
-      <if test="gmtCreate != null" >
+      <if test="gmtCreate != null">
         gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
       </if>
-      <if test="gmtModified != null" >
+      <if test="gmtModified != null">
         gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
       </if>
-      <if test="auditing != null" >
+      <if test="auditing != null">
         auditing = #{auditing,jdbcType=BIGINT},
       </if>
-      <if test="isAuditing != null" >
+      <if test="isAuditing != null">
         is_auditing = #{isAuditing,jdbcType=TINYINT},
       </if>
-      <if test="browsingVolume != null" >
+      <if test="browsingVolume != null">
         browsing_volume = #{browsingVolume,jdbcType=INTEGER},
       </if>
-      <if test="auctionRange != null" >
+      <if test="auctionRange != null">
         auction_range = #{auctionRange,jdbcType=BIGINT},
       </if>
-      <if test="isSuccess != null" >
+      <if test="isSuccess != null">
         is_success = #{isSuccess,jdbcType=TINYINT},
+      </if>
+      <if test="mileage != null">
+        mileage = #{mileage,jdbcType=TINYINT},
+      </if>
+      <if test="carAge != null">
+        car_age = #{carAge,jdbcType=TINYINT},
+      </if>
+      <if test="fuelType != null">
+        fuel_type = #{fuelType,jdbcType=TINYINT},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
-      and engine_type = #{engineType,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.fnzb.dao.entity.Auction" >
+  <update id="updateByPrimaryKey" parameterType="com.fnzb.dao.entity.Auction">
     update sc_auction
     set name = #{name,jdbcType=VARCHAR},
       auction_time = #{auctionTime,jdbcType=TIMESTAMP},
+      city_id = #{cityId,jdbcType=BIGINT},
+      city = #{city,jdbcType=VARCHAR},
+      province = #{province,jdbcType=VARCHAR},
+      province_id = #{provinceId,jdbcType=BIGINT},
       hold_site = #{holdSite,jdbcType=VARCHAR},
       trademark = #{trademark,jdbcType=VARCHAR},
       type = #{type,jdbcType=VARCHAR},
       number_plate = #{numberPlate,jdbcType=VARCHAR},
       colour = #{colour,jdbcType=VARCHAR},
       displacement = #{displacement,jdbcType=DECIMAL},
-      accident_acuse = #{accidentAcuse,jdbcType=TINYINT},
       gear_box = #{gearBox,jdbcType=TINYINT},
       vin_no = #{vinNo,jdbcType=VARCHAR},
-      compulsory_insurance = #{compulsoryInsurance,jdbcType=TIMESTAMP},
+      compulsory_insurance = #{compulsoryInsurance,jdbcType=DATE},
+      engine_type = #{engineType,jdbcType=VARCHAR},
       annual_survey_time = #{annualSurveyTime,jdbcType=TIMESTAMP},
       key_number = #{keyNumber,jdbcType=BIGINT},
       end_time = #{endTime,jdbcType=TIMESTAMP},
@@ -396,55 +464,9 @@
       browsing_volume = #{browsingVolume,jdbcType=INTEGER},
       auction_range = #{auctionRange,jdbcType=BIGINT},
       is_success = #{isSuccess,jdbcType=TINYINT},
+      mileage = #{mileage,jdbcType=TINYINT},
+      car_age = #{carAge,jdbcType=TINYINT},
+      fuel_type = #{fuelType,jdbcType=TINYINT}
     where id = #{id,jdbcType=BIGINT}
-      and engine_type = #{engineType,jdbcType=VARCHAR}
   </update>
-
-  <select id="findAll" resultMap="BaseResultMap" parameterType="com.fnzb.dao.entity.event.AuctionEvent">
-    select
-    <include refid="Base_Column_List" />
-    from sc_auction
-    where
-      is_auditing = 1 and is_success = 0
-    <if test="holdSite != null" >
-      and hold_site = #{holdSite,jdbcType=VARCHAR}
-    </if>
-    <if test="trademark != null" >
-      and trademark = #{trademark,jdbcType=VARCHAR}
-    </if>
-    <if test="carType != null" >
-      and car_type in
-      <foreach collection="carType" index="index" item="item" open="(" separator="," close=")">
-         #{item,jdbcType=TINYINT}
-      </foreach>
-    </if>
-    <if test="accidentAcuse != null" >
-      and accident_acuse in
-      <foreach collection="accidentAcuse" index="index" item="item" open="(" separator="," close=")">
-        #{item,jdbcType=TINYINT}
-      </foreach>
-    </if>
-    order by auction_time ASC
-    limit #{rowIndex},#{pageSize}
-  </select>
-
-  <select id="selectAuctionCount" parameterType="com.fnzb.dao.entity.event.AuctionEvent" resultType="java.lang.Integer">
-    select count(id)
-    from sc_auction
-    where
-    is_auditing = 1 and is_success = 0
-    <if test="holdSite != null" >
-      and hold_site = #{holdSite,jdbcType=VARCHAR}
-    </if>
-    <if test="trademark != null" >
-      and trademark = #{trademark,jdbcType=VARCHAR}
-    </if>
-    <if test="carType != null" >
-      and car_type = #{carType,jdbcType=TINYINT}
-    </if>
-    <if test="accidentAcuse != null" >
-      and accident_acuse = #{accidentAcuse,jdbcType=TINYINT}
-    </if>
-  </select>
-
 </mapper>
