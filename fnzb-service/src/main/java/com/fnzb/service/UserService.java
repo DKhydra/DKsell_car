@@ -1,5 +1,6 @@
 package com.fnzb.service;
 
+import com.aliyuncs.exceptions.ClientException;
 import com.fnzb.dao.entity.User;
 import com.fnzb.dao.entity.event.UserEvent;
 import org.apache.ibatis.annotations.Param;
@@ -69,4 +70,6 @@ public interface UserService {
      * @return
      */
     boolean verifyMobile(Long mobile);
+
+
 }

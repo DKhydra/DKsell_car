@@ -2,6 +2,7 @@ package com.fnzb.utils;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Random;
 
 import com.aliyuncs.DefaultAcsClient;
 import com.aliyuncs.IAcsClient;
@@ -9,17 +10,12 @@ import com.aliyuncs.dysmsapi.model.v20170525.QuerySendDetailsRequest;
 import com.aliyuncs.dysmsapi.model.v20170525.QuerySendDetailsResponse;
 import com.aliyuncs.dysmsapi.model.v20170525.SendSmsRequest;
 import com.aliyuncs.dysmsapi.model.v20170525.SendSmsResponse;
-import com.aliyuncs.dysmsapi.transform.v20170525.SendSmsResponseUnmarshaller;
 import com.aliyuncs.exceptions.ClientException;
-import com.aliyuncs.http.FormatType;
-import com.aliyuncs.http.HttpResponse;
 import com.aliyuncs.profile.DefaultProfile;
 import com.aliyuncs.profile.IClientProfile;
+import com.fnzb.utils.event.CodeTpye;
 
-import java.nio.charset.Charset;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.UUID;
+import javax.servlet.http.HttpSession;
 
 /**
  * Created on 17/6/7.
@@ -44,14 +40,14 @@ public class SendMessage {
     static final String accessKeySecret = "A7bKfWR4nmwp4Ib1tJDIQvYmRH5T1v";
     static final String SignName = "云上乌托邦";
     //短信模板
-    static final String TemplateCode = "SMS_150737939";
+    static final String TemplateCode = CodeTpye.getVerificationCode();
     /**
      *
      * @param mobile
      * @return
      * @throws ClientException
      */
-    public static SendSmsResponse sendSms(Long mobile) throws ClientException {
+    public static SendSmsResponse sendSms(Long mobile, HttpSession session) throws ClientException {
         //将手机号转换为字符串
         String Mobile = String.valueOf(mobile);
         //可自助调整超时时间
@@ -70,13 +66,16 @@ public class SendMessage {
         //必填:短信模板-可在短信控制台中找到
         request.setTemplateCode(TemplateCode);
         //可选:模板中的变量替换JSON串,如模板内容为"亲爱的${name},您的验证码为${code}"时,此处的值为
-        request.setTemplateParam("{\"name\":\"Tom\", \"code\":\"123\"}");
+        // request.setTemplateParam("{\"name\":\"Tom\", \"code\":\"123\"}");
+        String verifyCode = String.valueOf(new Random().nextInt(899999) + 100000);
+        request.setTemplateParam("{\"code\":\""+verifyCode+"\"}");
+        session.setAttribute("verifyCode",verifyCode);
+        //120秒验证码失效
+        session.setMaxInactiveInterval(2*60);
         //选填-上行短信扩展码(无特殊需求用户请忽略此字段)
         //request.setSmsUpExtendCode("90997");
-
         //可选:outId为提供给业务方扩展字段,最终在短信回执消息中将此值带回给调用者
-        request.setOutId("yourOutId");
-
+        //request.setOutId("yourOutId");
         //hint 此处可能会抛出异常，注意catch
         SendSmsResponse sendSmsResponse = acsClient.getAcsResponse(request);
 

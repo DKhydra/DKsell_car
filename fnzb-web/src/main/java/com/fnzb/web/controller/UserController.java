@@ -6,6 +6,7 @@ import com.fnzb.exception.XbaseError;
 import com.fnzb.result.ResultModel;
 import com.fnzb.service.UserService;
 import com.fnzb.spring.util.PageInfo;
+import com.fnzb.utils.SendMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -131,4 +132,5 @@ public class UserController {
         }
         return result.dump();
     }
+
 }

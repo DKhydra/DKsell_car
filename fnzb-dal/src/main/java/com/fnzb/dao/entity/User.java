@@ -1,5 +1,7 @@
 package com.fnzb.dao.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -27,6 +29,8 @@ public class User implements Serializable {
     private String city;
 
     private String userPicture;
+
+    private String password;
 
     private Date gmtCreate;
 
@@ -56,6 +60,14 @@ public class User implements Serializable {
 
     public void setMobile(Long mobile) {
         this.mobile = mobile;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getTelephone() {
@@ -135,6 +147,9 @@ public class User implements Serializable {
     }
 
     public void setGmtCreate(Date gmtCreate) {
+
+
+
         this.gmtCreate = gmtCreate;
     }
 
