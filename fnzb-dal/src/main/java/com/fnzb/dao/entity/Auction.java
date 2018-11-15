@@ -1,22 +1,23 @@
 package com.fnzb.dao.entity;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class Auction {
+public class Auction implements Serializable {
     private Long id;
 
     private String name;
 
     private Date auctionTime;
 
-    private Long cityId;
+    private String cityId;
 
     private String city;
 
     private String province;
 
-    private Long provinceId;
+    private String provinceId;
 
     private String holdSite;
 
@@ -78,6 +79,8 @@ public class Auction {
 
     private Byte fuelType;
 
+    private static final long serialVersionUID = 1L;
+
     public Long getId() {
         return id;
     }
@@ -102,14 +105,6 @@ public class Auction {
         this.auctionTime = auctionTime;
     }
 
-    public Long getCityId() {
-        return cityId;
-    }
-
-    public void setCityId(Long cityId) {
-        this.cityId = cityId;
-    }
-
     public String getCity() {
         return city;
     }
@@ -124,14 +119,6 @@ public class Auction {
 
     public void setProvince(String province) {
         this.province = province == null ? null : province.trim();
-    }
-
-    public Long getProvinceId() {
-        return provinceId;
-    }
-
-    public void setProvinceId(Long provinceId) {
-        this.provinceId = provinceId;
     }
 
     public String getHoldSite() {
@@ -164,6 +151,22 @@ public class Auction {
 
     public void setNumberPlate(String numberPlate) {
         this.numberPlate = numberPlate == null ? null : numberPlate.trim();
+    }
+
+    public String getCityId() {
+        return cityId;
+    }
+
+    public void setCityId(String cityId) {
+        this.cityId = cityId;
+    }
+
+    public String getProvinceId() {
+        return provinceId;
+    }
+
+    public void setProvinceId(String provinceId) {
+        this.provinceId = provinceId;
     }
 
     public String getColour() {

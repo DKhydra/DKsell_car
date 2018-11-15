@@ -1,11 +1,15 @@
 package com.fnzb.dao.entity;
 
-public class WhiteList {
+import java.io.Serializable;
+
+public class WhiteList implements Serializable {
     private Long id;
 
     private Long carId;
 
     private Long mobile;
+
+    private static final long serialVersionUID = 1L;
 
     public Long getId() {
         return id;

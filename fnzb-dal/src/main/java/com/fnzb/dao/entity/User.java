@@ -1,8 +1,9 @@
 package com.fnzb.dao.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class User {
+public class User implements Serializable {
     private Long id;
 
     private String openId;
@@ -21,7 +22,7 @@ public class User {
 
     private Byte isVerification;
 
-    private Long cityId;
+    private String cityId;
 
     private String city;
 
@@ -30,6 +31,8 @@ public class User {
     private Date gmtCreate;
 
     private Date gmtModified;
+
+    private static final long serialVersionUID = 1L;
 
     public Long getId() {
         return id;
@@ -103,11 +106,11 @@ public class User {
         this.isVerification = isVerification;
     }
 
-    public Long getCityId() {
+    public String getCityId() {
         return cityId;
     }
 
-    public void setCityId(Long cityId) {
+    public void setCityId(String cityId) {
         this.cityId = cityId;
     }
 

@@ -1,8 +1,9 @@
 package com.fnzb.dao.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Property {
+public class Property implements Serializable {
     private Long id;
 
     private Long userId;
@@ -12,6 +13,8 @@ public class Property {
     private Date gmtCreate;
 
     private Date gmtModified;
+
+    private static final long serialVersionUID = 1L;
 
     public Long getId() {
         return id;

@@ -1,6 +1,8 @@
 package com.fnzb.dao.entity;
 
-public class Area {
+import java.io.Serializable;
+
+public class Area implements Serializable {
     private Long id;
 
     private String name;
@@ -10,6 +12,8 @@ public class Area {
     private String code;
 
     private String grade;
+
+    private static final long serialVersionUID = 1L;
 
     public Long getId() {
         return id;

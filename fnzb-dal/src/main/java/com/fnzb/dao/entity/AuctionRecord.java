@@ -1,9 +1,10 @@
 package com.fnzb.dao.entity;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class AuctionRecord {
+public class AuctionRecord implements Serializable {
     private Long id;
 
     private Long carInfo;
@@ -19,6 +20,8 @@ public class AuctionRecord {
     private Date gmtModified;
 
     private BigDecimal bond;
+
+    private static final long serialVersionUID = 1L;
 
     public Long getId() {
         return id;

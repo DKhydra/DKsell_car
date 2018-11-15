@@ -1,8 +1,9 @@
 package com.fnzb.dao.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Account {
+public class Account implements Serializable {
     private Long id;
 
     private Byte rechargeType;
@@ -18,6 +19,8 @@ public class Account {
     private Date gmtCreate;
 
     private Date gmtModified;
+
+    private static final long serialVersionUID = 1L;
 
     public Long getId() {
         return id;

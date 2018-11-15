@@ -27,13 +27,11 @@ public enum XbaseError {
 	USER_NEW_PASS_ERROR("X0130005", "new password must be diff with old password"),
 	USER_STATUS_ERROR("X0140006", "user status is disabled."),
 
-	//考核相关
-	CHECKTASK_CREATE_ERROR("C100001","创建考核任务失败。"),
-	CHECK_GET_ERROR("C100002","获取考核信息失败。"),
-	
-	ABNORMAL_ROLLBACK("H100002","异常回滚"),
 
-
+	FAIL_TO_DELETE("FTD0001","删除失败"),
+	FAIL_TO_ADD("FTD0002","添加失败"),
+	FAIL_TO_MODIFY("FTD0003","修改失败"),
+	FAIL_TO_SELECT("FTD0003","未存在"),
 
 	SYS_ERROR("X0110001", "System internal error."),
 	SYS_NPE_ERROR("X0110002", "System error, no data returned."),

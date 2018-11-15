@@ -3,7 +3,7 @@ package com.fnzb.dao.entity.event;
 import com.fnzb.utils.event.PageEvent;
 
 /**
- * 用户分页类
+ * 用户分页类 手机号 身份证 真实姓名模糊匹配
  */
 public class UserEvent extends PageEvent {
 
@@ -12,8 +12,25 @@ public class UserEvent extends PageEvent {
     private String email;
     private Long mobile;
     private String openId;
-    private String nickName;
     private Byte isVerification;
+    private String cityId;
+    private String city;
+
+    public String getCityId() {
+        return cityId;
+    }
+
+    public void setCityId(String cityId) {
+        this.cityId = cityId;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
 
     public Byte getIsVerification() {
         return isVerification;
@@ -63,11 +80,4 @@ public class UserEvent extends PageEvent {
         this.openId = openId;
     }
 
-    public String getNickName() {
-        return nickName;
-    }
-
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
-    }
 }

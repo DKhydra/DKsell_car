@@ -1,8 +1,9 @@
 package com.fnzb.dao.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class AuctionExamine {
+public class AuctionExamine implements Serializable {
     private Long id;
 
     private Long auctionId;
@@ -14,6 +15,8 @@ public class AuctionExamine {
     private Date gmtCreate;
 
     private Date gmtModified;
+
+    private static final long serialVersionUID = 1L;
 
     public Long getId() {
         return id;

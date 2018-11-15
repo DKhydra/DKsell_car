@@ -15,6 +15,7 @@ public class ResultModel<T> implements Serializable {
 	private static final long serialVersionUID = -9058230013921591135L;
 
 	private String returnCode = "000000";
+
 	/** 错误码 */
 	private String returnMessage;
 

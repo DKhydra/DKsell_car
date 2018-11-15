@@ -1,11 +1,15 @@
 package com.fnzb.dao.entity;
 
-public class Collect {
+import java.io.Serializable;
+
+public class Collect implements Serializable {
     private Long id;
 
     private Long userId;
 
     private Long autionId;
+
+    private static final long serialVersionUID = 1L;
 
     public Long getId() {
         return id;

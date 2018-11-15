@@ -21,128 +21,120 @@
     id, open_id, mobile, telephone, email, id_number, real_name, id_picture, is_verification, 
     city_id, city, user_picture, gmt_create, gmt_modified
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+
+  <select id="selectUserByMobile" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
     from sc_user
-    where id = #{id,jdbcType=BIGINT}
+    where mobile = #{mobile,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-    delete from sc_user
-    where id = #{id,jdbcType=BIGINT}
+
+  <select id="selectUserByUser" resultType="BaseResultMap" parameterType="java.lang.String">
+    select
+    <include refid="Base_Column_List" />
+    from sc_user
+    where open_id = #{openId,jdbcType=VARCHAR}
+  </select>
+
+  <select id="verifyIdNumber"  parameterType="java.lang.String" resultType="java.lang.String">
+    select
+    id
+    from sc_user
+    where id_number = #{idNumber,jdbcType=VARCHAR}
+  </select>
+
+  <select id="verifyIdNumber"  parameterType="java.lang.Long" resultType="java.lang.Long">
+    select
+    id
+    from sc_user
+    where mobile = #{mobile,jdbcType=BIGINT}
+  </select>
+
+  <select id="selectUserAll" resultMap="BaseResultMap" parameterType="com.fnzb.dao.entity.event.UserEvent">
+    select
+    <include refid="Base_Column_List" />
+    from sc_user
+    <trim prefix="where" prefixOverrides="and | or">
+      <if test="openId != null" >
+        open_id = #{openId,jdbcType=VARCHAR}
+      </if>
+      <if test="mobile != null" >
+        mobile  like CONCAT('%', #{mobile,jdbcType=BIGINT} , '%')
+      </if>
+      <if test="idNumber != null" >
+        id_number like CONCAT('%', #{idNumber,jdbcType=VARCHAR} , '%')
+      </if>
+      <if test="realName != null" >
+        real_name like CONCAT('%', #{realName,jdbcType=VARCHAR} , '%')
+      </if>
+      <if test="isVerification != null" >
+        is_verification = #{isVerification,jdbcType=TINYINT}
+      </if>
+      <if test="cityId != null" >
+        city_id =#{cityId,jdbcType=VARCHAR}
+      </if>
+      <if test="city != null" >
+        city =#{cityId,jdbcType=BIGINT}
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR}
+      </if>
+    </trim>
+    order by id desc
+    limit #{rowIndex},#{pageSize}
+  </select>
+
+  <select id="selectUserCount" parameterType="com.fnzb.dao.entity.event.UserEvent">
+     SELECT COUNT(id) FROM sc_user
+    <trim prefix="where" prefixOverrides="and | or">
+      <if test="openId != null" >
+        open_id = #{openId,jdbcType=VARCHAR}
+      </if>
+      <if test="mobile != null" >
+        mobile  like CONCAT('%', #{mobile,jdbcType=BIGINT} , '%')
+      </if>
+      <if test="idNumber != null" >
+        id_number like CONCAT('%', #{idNumber,jdbcType=VARCHAR} , '%')
+      </if>
+      <if test="realName != null" >
+        real_name like CONCAT('%', #{realName,jdbcType=VARCHAR} , '%')
+      </if>
+      <if test="isVerification != null" >
+        is_verification = #{isVerification,jdbcType=TINYINT}
+      </if>
+      <if test="cityId != null" >
+        city_id =#{cityId,jdbcType=VARCHAR}
+      </if>
+      <if test="city != null" >
+        city =#{cityId,jdbcType=BIGINT}
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR}
+      </if>
+    </trim>
+  </select>
+
+  <delete id="deleteUserById" parameterType="java.util.List" >
+    delete
+    from sc_user
+    where id in
+    <foreach collection="list" open="(" close=")" separator="," item="id" index="index">
+      #{id,jdbcType=BIGINT}
+    </foreach>
   </delete>
+
+
   <insert id="insert" parameterType="com.fnzb.dao.entity.User" >
-    insert into sc_user (id, open_id, mobile, 
-      telephone, email, id_number, 
-      real_name, id_picture, is_verification, 
-      city_id, city, user_picture, 
-      gmt_create, gmt_modified)
-    values (#{id,jdbcType=BIGINT}, #{openId,jdbcType=VARCHAR}, #{mobile,jdbcType=BIGINT}, 
-      #{telephone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{idNumber,jdbcType=VARCHAR}, 
-      #{realName,jdbcType=VARCHAR}, #{idPicture,jdbcType=VARCHAR}, #{isVerification,jdbcType=TINYINT}, 
-      #{cityId,jdbcType=BIGINT}, #{city,jdbcType=VARCHAR}, #{userPicture,jdbcType=VARCHAR}, 
-      #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP})
+    insert into sc_user ( open_id, mobile,
+      gmt_create)
+    values (#{#{openId,jdbcType=VARCHAR}, #{mobile,jdbcType=BIGINT},
+      #{gmtCreate,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.fnzb.dao.entity.User" >
-    insert into sc_user
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
-      <if test="openId != null" >
-        open_id,
-      </if>
-      <if test="mobile != null" >
-        mobile,
-      </if>
-      <if test="telephone != null" >
-        telephone,
-      </if>
-      <if test="email != null" >
-        email,
-      </if>
-      <if test="idNumber != null" >
-        id_number,
-      </if>
-      <if test="realName != null" >
-        real_name,
-      </if>
-      <if test="idPicture != null" >
-        id_picture,
-      </if>
-      <if test="isVerification != null" >
-        is_verification,
-      </if>
-      <if test="cityId != null" >
-        city_id,
-      </if>
-      <if test="city != null" >
-        city,
-      </if>
-      <if test="userPicture != null" >
-        user_picture,
-      </if>
-      <if test="gmtCreate != null" >
-        gmt_create,
-      </if>
-      <if test="gmtModified != null" >
-        gmt_modified,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=BIGINT},
-      </if>
-      <if test="openId != null" >
-        #{openId,jdbcType=VARCHAR},
-      </if>
-      <if test="mobile != null" >
-        #{mobile,jdbcType=BIGINT},
-      </if>
-      <if test="telephone != null" >
-        #{telephone,jdbcType=VARCHAR},
-      </if>
-      <if test="email != null" >
-        #{email,jdbcType=VARCHAR},
-      </if>
-      <if test="idNumber != null" >
-        #{idNumber,jdbcType=VARCHAR},
-      </if>
-      <if test="realName != null" >
-        #{realName,jdbcType=VARCHAR},
-      </if>
-      <if test="idPicture != null" >
-        #{idPicture,jdbcType=VARCHAR},
-      </if>
-      <if test="isVerification != null" >
-        #{isVerification,jdbcType=TINYINT},
-      </if>
-      <if test="cityId != null" >
-        #{cityId,jdbcType=BIGINT},
-      </if>
-      <if test="city != null" >
-        #{city,jdbcType=VARCHAR},
-      </if>
-      <if test="userPicture != null" >
-        #{userPicture,jdbcType=VARCHAR},
-      </if>
-      <if test="gmtCreate != null" >
-        #{gmtCreate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="gmtModified != null" >
-        #{gmtModified,jdbcType=TIMESTAMP},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.fnzb.dao.entity.User" >
+
+
+  <update id="updateUser" parameterType="com.fnzb.dao.entity.User" >
     update sc_user
     <set >
-      <if test="openId != null" >
-        open_id = #{openId,jdbcType=VARCHAR},
-      </if>
-      <if test="mobile != null" >
-        mobile = #{mobile,jdbcType=BIGINT},
-      </if>
       <if test="telephone != null" >
         telephone = #{telephone,jdbcType=VARCHAR},
       </if>
@@ -170,30 +162,10 @@
       <if test="userPicture != null" >
         user_picture = #{userPicture,jdbcType=VARCHAR},
       </if>
-      <if test="gmtCreate != null" >
-        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
-      </if>
       <if test="gmtModified != null" >
         gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
       </if>
     </set>
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.fnzb.dao.entity.User" >
-    update sc_user
-    set open_id = #{openId,jdbcType=VARCHAR},
-      mobile = #{mobile,jdbcType=BIGINT},
-      telephone = #{telephone,jdbcType=VARCHAR},
-      email = #{email,jdbcType=VARCHAR},
-      id_number = #{idNumber,jdbcType=VARCHAR},
-      real_name = #{realName,jdbcType=VARCHAR},
-      id_picture = #{idPicture,jdbcType=VARCHAR},
-      is_verification = #{isVerification,jdbcType=TINYINT},
-      city_id = #{cityId,jdbcType=BIGINT},
-      city = #{city,jdbcType=VARCHAR},
-      user_picture = #{userPicture,jdbcType=VARCHAR},
-      gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
-      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=BIGINT}
+    where  mobile = #{mobile,jdbcType=BIGINT}
   </update>
 </mapper>
