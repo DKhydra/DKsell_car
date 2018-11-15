@@ -10,9 +10,10 @@
     <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
     <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
     <result column="bond" property="bond" jdbcType="DECIMAL" />
+    <result column="is_show" property="isShow" jdbcType="TINYINT" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, car_info, bidders_id, auction_id, is_deal, gmt_create, gmt_modified, bond
+    id, car_info, bidders_id, auction_id, is_deal, gmt_create, gmt_modified, bond, is_show
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
@@ -27,10 +28,10 @@
   <insert id="insert" parameterType="com.fnzb.dao.entity.AuctionRecord" >
     insert into sc_auction_record (id, car_info, bidders_id, 
       auction_id, is_deal, gmt_create, 
-      gmt_modified, bond)
+      gmt_modified, bond, is_show)
     values (#{id,jdbcType=BIGINT}, #{carInfo,jdbcType=BIGINT}, #{biddersId,jdbcType=BIGINT}, 
       #{auctionId,jdbcType=BIGINT}, #{isDeal,jdbcType=TINYINT}, #{gmtCreate,jdbcType=TIMESTAMP}, 
-      #{gmtModified,jdbcType=TIMESTAMP}, #{bond,jdbcType=DECIMAL})
+      #{gmtModified,jdbcType=TIMESTAMP}, #{bond,jdbcType=DECIMAL}, #{isShow,jdbcType=TINYINT})
   </insert>
   <insert id="insertSelective" parameterType="com.fnzb.dao.entity.AuctionRecord" >
     insert into sc_auction_record
@@ -59,6 +60,9 @@
       <if test="bond != null" >
         bond,
       </if>
+      <if test="isShow != null" >
+        is_show,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -84,6 +88,9 @@
       </if>
       <if test="bond != null" >
         #{bond,jdbcType=DECIMAL},
+      </if>
+      <if test="isShow != null" >
+        #{isShow,jdbcType=TINYINT},
       </if>
     </trim>
   </insert>
@@ -111,6 +118,9 @@
       <if test="bond != null" >
         bond = #{bond,jdbcType=DECIMAL},
       </if>
+      <if test="isShow != null" >
+        is_show = #{isShow,jdbcType=TINYINT},
+      </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
@@ -122,7 +132,8 @@
       is_deal = #{isDeal,jdbcType=TINYINT},
       gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
       gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
-      bond = #{bond,jdbcType=DECIMAL}
+      bond = #{bond,jdbcType=DECIMAL},
+      is_show = #{isShow,jdbcType=TINYINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

@@ -27,6 +27,7 @@
     <result column="remarks" property="remarks" jdbcType="VARCHAR" />
     <result column="procedures_picture" property="proceduresPicture" jdbcType="VARCHAR" />
     <result column="vehicle_picture" property="vehiclePicture" jdbcType="VARCHAR" />
+    <result column="upset_price" property="upsetPrice" jdbcType="DECIMAL" />
     <result column="price" property="price" jdbcType="DECIMAL" />
     <result column="car_type" property="carType" jdbcType="TINYINT" />
     <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
@@ -44,7 +45,7 @@
     id, name, auction_time, city_id, city, province, province_id, hold_site, trademark, 
     type, number_plate, colour, displacement, gear_box, vin_no, compulsory_insurance, 
     engine_type, annual_survey_time, key_number, end_time, vehicle_tax_time, plate_number, 
-    remarks, procedures_picture, vehicle_picture, price, car_type, gmt_create, gmt_modified, 
+    remarks, procedures_picture, vehicle_picture, upset_price, price, car_type, gmt_create, gmt_modified,
     auditing, is_auditing, browsing_volume, auction_range, is_success, mileage, car_age, 
     fuel_type
   </sql>
@@ -67,7 +68,7 @@
       compulsory_insurance, engine_type, annual_survey_time, 
       key_number, end_time, vehicle_tax_time, 
       plate_number, remarks, procedures_picture, 
-      vehicle_picture, price, car_type, 
+      vehicle_picture, upset_price, price, car_type,
       gmt_create, gmt_modified, auditing, 
       is_auditing, browsing_volume, auction_range, 
       is_success, mileage, car_age, 
@@ -80,7 +81,7 @@
       #{compulsoryInsurance,jdbcType=DATE}, #{engineType,jdbcType=VARCHAR}, #{annualSurveyTime,jdbcType=TIMESTAMP}, 
       #{keyNumber,jdbcType=BIGINT}, #{endTime,jdbcType=TIMESTAMP}, #{vehicleTaxTime,jdbcType=TIMESTAMP}, 
       #{plateNumber,jdbcType=INTEGER}, #{remarks,jdbcType=VARCHAR}, #{proceduresPicture,jdbcType=VARCHAR}, 
-      #{vehiclePicture,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, #{carType,jdbcType=TINYINT}, 
+      #{vehiclePicture,jdbcType=VARCHAR}, #{upsetPrice,jdbcType=DECIMAL}, #{price,jdbcType=DECIMAL}, #{carType,jdbcType=TINYINT},
       #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}, #{auditing,jdbcType=BIGINT}, 
       #{isAuditing,jdbcType=TINYINT}, #{browsingVolume,jdbcType=INTEGER}, #{auctionRange,jdbcType=BIGINT}, 
       #{isSuccess,jdbcType=TINYINT}, #{mileage,jdbcType=TINYINT}, #{carAge,jdbcType=TINYINT}, 
@@ -163,6 +164,9 @@
       </if>
       <if test="vehiclePicture != null" >
         vehicle_picture,
+      </if>
+      <if test="upsetPrice != null" >
+        upset_price,
       </if>
       <if test="price != null" >
         price,
@@ -277,6 +281,9 @@
       <if test="vehiclePicture != null" >
         #{vehiclePicture,jdbcType=VARCHAR},
       </if>
+      <if test="upsetPrice != null" >
+        #{upsetPrice,jdbcType=DECIMAL},
+      </if>
       <if test="price != null" >
         #{price,jdbcType=DECIMAL},
       </if>
@@ -390,6 +397,9 @@
       <if test="vehiclePicture != null" >
         vehicle_picture = #{vehiclePicture,jdbcType=VARCHAR},
       </if>
+      <if test="upsetPrice != null" >
+        upset_price = #{upsetPrice,jdbcType=DECIMAL},
+      </if>
       <if test="price != null" >
         price = #{price,jdbcType=DECIMAL},
       </if>
@@ -455,6 +465,7 @@
       remarks = #{remarks,jdbcType=VARCHAR},
       procedures_picture = #{proceduresPicture,jdbcType=VARCHAR},
       vehicle_picture = #{vehiclePicture,jdbcType=VARCHAR},
+      upset_price = #{upsetPrice,jdbcType=DECIMAL},
       price = #{price,jdbcType=DECIMAL},
       car_type = #{carType,jdbcType=TINYINT},
       gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
@@ -469,4 +480,64 @@
       fuel_type = #{fuelType,jdbcType=TINYINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+  <!-- 分页查询已审核，还没交易成功的数据 -->
+  <select id="findAllBiddingAuction" resultMap="BaseResultMap" parameterType="com.fnzb.dao.entity.event.AuctionEvent">
+    select
+    <include refid="Base_Column_List" />
+    from sc_auction
+    where
+    is_auditing = 1 and is_success = 0
+    <if test="trademark != null" >
+      and trademark = #{trademark,jdbcType=VARCHAR}
+    </if>
+    <if test="upsetPrice != null" >
+      and upset_price = #{upsetPrice,jdbcType=DECIMAL}
+    </if>
+    order by auction_time ASC
+    limit #{rowIndex},#{pageSize}
+  </select>
+
+  <!-- 分页查询已审核的数据 -->
+  <select id="findAllAuditParamter" resultMap="BaseResultMap" parameterType="com.fnzb.dao.entity.event.AuctionEvent">
+    select
+    <include refid="Base_Column_List" />
+    from sc_auction
+    where is_auditing = 1
+    <if test="trademark != null" >
+      and trademark = #{trademark,jdbcType=VARCHAR}
+    </if>
+    <if test="upsetPrice != null" >
+      and upset_price = #{upsetPrice,jdbcType=DECIMAL}
+    </if>
+    order by auction_time ASC
+    limit #{rowIndex},#{pageSize}
+  </select>
+
+  <!-- 统计已审核，还没交易成功的数据 -->
+  <select id="selectBiddingAuctionCount" parameterType="com.fnzb.dao.entity.event.AuctionEvent" resultType="java.lang.Integer">
+    select count(id)
+    from sc_auction
+    where
+    is_auditing = 1 and is_success = 0
+    <if test="trademark != null" >
+      and trademark = #{trademark,jdbcType=VARCHAR}
+    </if>
+    <if test="upsetPrice != null" >
+      and upset_price = #{upsetPrice,jdbcType=DECIMAL}
+    </if>
+  </select>
+
+  <!-- 统计已审核的数据 -->
+  <select id="selectAllAuditParamterCount" parameterType="com.fnzb.dao.entity.event.AuctionEvent" resultType="java.lang.Integer">
+    select count(id)
+    from sc_auction
+    where is_auditing = 1
+    <if test="trademark != null" >
+      and trademark = #{trademark,jdbcType=VARCHAR}
+    </if>
+    <if test="upsetPrice != null" >
+      and upset_price = #{upsetPrice,jdbcType=DECIMAL}
+    </if>
+  </select>
 </mapper>

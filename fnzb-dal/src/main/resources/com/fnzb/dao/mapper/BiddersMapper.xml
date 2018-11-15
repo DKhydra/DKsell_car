@@ -125,4 +125,12 @@
       gmt_modified = #{gmtModified,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+  <!-- 根据手机号查询 -->
+  <select id="selectByCarInfo" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from sc_bidders
+    where user_id = #{userId,jdbcType=BIGINT}
+  </select>
 </mapper>

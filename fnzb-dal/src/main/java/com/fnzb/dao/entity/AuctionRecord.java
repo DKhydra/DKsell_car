@@ -20,6 +20,8 @@ public class AuctionRecord {
 
     private BigDecimal bond;
 
+    private Byte isShow;
+
     public Long getId() {
         return id;
     }
@@ -82,5 +84,13 @@ public class AuctionRecord {
 
     public void setBond(BigDecimal bond) {
         this.bond = bond;
+    }
+
+    public Byte getIsShow() {
+        return isShow;
+    }
+
+    public void setIsShow(Byte isShow) {
+        this.isShow = isShow;
     }
 }
