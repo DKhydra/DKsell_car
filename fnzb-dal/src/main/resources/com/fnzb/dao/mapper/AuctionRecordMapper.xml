@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fnzb.dao.mapper.AuctionRecordMapper" >
+  <resultMap id="BaseResultMap" type="com.fnzb.dao.entity.AuctionRecord" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="car_info" property="carInfo" jdbcType="BIGINT" />
+    <result column="bidders_id" property="biddersId" jdbcType="BIGINT" />
+    <result column="auction_id" property="auctionId" jdbcType="BIGINT" />
+    <result column="is_deal" property="isDeal" jdbcType="TINYINT" />
+    <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
+    <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
+    <result column="bond" property="bond" jdbcType="DECIMAL" />
+    <result column="is_show" property="isShow" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, car_info, bidders_id, auction_id, is_deal, gmt_create, gmt_modified, bond, is_show
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from sc_auction_record
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from sc_auction_record
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.fnzb.dao.entity.AuctionRecord" >
+    insert into sc_auction_record (id, car_info, bidders_id, 
+      auction_id, is_deal, gmt_create, 
+      gmt_modified, bond, is_show)
+    values (#{id,jdbcType=BIGINT}, #{carInfo,jdbcType=BIGINT}, #{biddersId,jdbcType=BIGINT}, 
+      #{auctionId,jdbcType=BIGINT}, #{isDeal,jdbcType=TINYINT}, #{gmtCreate,jdbcType=TIMESTAMP}, 
+      #{gmtModified,jdbcType=TIMESTAMP}, #{bond,jdbcType=DECIMAL}, #{isShow,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fnzb.dao.entity.AuctionRecord" >
+    insert into sc_auction_record
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="carInfo != null" >
+        car_info,
+      </if>
+      <if test="biddersId != null" >
+        bidders_id,
+      </if>
+      <if test="auctionId != null" >
+        auction_id,
+      </if>
+      <if test="isDeal != null" >
+        is_deal,
+      </if>
+      <if test="gmtCreate != null" >
+        gmt_create,
+      </if>
+      <if test="gmtModified != null" >
+        gmt_modified,
+      </if>
+      <if test="bond != null" >
+        bond,
+      </if>
+      <if test="isShow != null" >
+        is_show,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="carInfo != null" >
+        #{carInfo,jdbcType=BIGINT},
+      </if>
+      <if test="biddersId != null" >
+        #{biddersId,jdbcType=BIGINT},
+      </if>
+      <if test="auctionId != null" >
+        #{auctionId,jdbcType=BIGINT},
+      </if>
+      <if test="isDeal != null" >
+        #{isDeal,jdbcType=TINYINT},
+      </if>
+      <if test="gmtCreate != null" >
+        #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null" >
+        #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bond != null" >
+        #{bond,jdbcType=DECIMAL},
+      </if>
+      <if test="isShow != null" >
+        #{isShow,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fnzb.dao.entity.AuctionRecord" >
+    update sc_auction_record
+    <set >
+      <if test="carInfo != null" >
+        car_info = #{carInfo,jdbcType=BIGINT},
+      </if>
+      <if test="biddersId != null" >
+        bidders_id = #{biddersId,jdbcType=BIGINT},
+      </if>
+      <if test="auctionId != null" >
+        auction_id = #{auctionId,jdbcType=BIGINT},
+      </if>
+      <if test="isDeal != null" >
+        is_deal = #{isDeal,jdbcType=TINYINT},
+      </if>
+      <if test="gmtCreate != null" >
+        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null" >
+        gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bond != null" >
+        bond = #{bond,jdbcType=DECIMAL},
+      </if>
+      <if test="isShow != null" >
+        is_show = #{isShow,jdbcType=TINYINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fnzb.dao.entity.AuctionRecord" >
+    update sc_auction_record
+    set car_info = #{carInfo,jdbcType=BIGINT},
+      bidders_id = #{biddersId,jdbcType=BIGINT},
+      auction_id = #{auctionId,jdbcType=BIGINT},
+      is_deal = #{isDeal,jdbcType=TINYINT},
+      gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      bond = #{bond,jdbcType=DECIMAL},
+      is_show = #{isShow,jdbcType=TINYINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

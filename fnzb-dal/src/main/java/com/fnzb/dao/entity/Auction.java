@@ -55,6 +55,8 @@ public class Auction implements Serializable {
 
     private String vehiclePicture;
 
+    private BigDecimal upsetPrice;
+
     private BigDecimal price;
 
     private Byte carType;
@@ -375,5 +377,13 @@ public class Auction implements Serializable {
 
     public void setFuelType(Byte fuelType) {
         this.fuelType = fuelType;
+    }
+
+    public BigDecimal getUpsetPrice() {
+        return upsetPrice;
+    }
+
+    public void setUpsetPrice(BigDecimal upsetPrice) {
+        this.upsetPrice = upsetPrice;
     }
 }
