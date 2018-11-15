@@ -1,6 +1,5 @@
 package com.fnzb.service;
 
-import com.fnzb.dao.entity.User;
 import com.fnzb.dao.entity.event.UserEvent;
 
 import java.util.List;

@@ -1,6 +1,5 @@
 package com.fnzb.service.Impl;
 
-import com.fnzb.dao.entity.User;
 import com.fnzb.dao.entity.event.UserEvent;
 import com.fnzb.dao.mapper.UserMapper;
 import com.fnzb.service.UserService;

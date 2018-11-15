@@ -1,6 +1,5 @@
 package com.fnzb.web.controller;
 
-import com.fnzb.dao.entity.User;
 import com.fnzb.dao.entity.event.UserEvent;
 import com.fnzb.exception.XbaseError;
 import com.fnzb.result.ResultModel;

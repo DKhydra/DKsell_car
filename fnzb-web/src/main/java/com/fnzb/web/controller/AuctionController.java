@@ -1,13 +1,11 @@
 package com.fnzb.web.controller;
 
-import com.fnzb.dao.entity.Auction;
 import com.fnzb.result.ResultModel;
 import com.fnzb.service.AuctionService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
