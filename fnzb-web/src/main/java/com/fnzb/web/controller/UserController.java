@@ -197,9 +197,34 @@ public class UserController {
         return result.dump();
     }
 
-    @RequestMapping(value = "/loginForPc", method = RequestMethod.POST)
+    @RequestMapping(value = "/loginForWX", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, Object> loginForPc(User user) {
-        return null;
+    public Map<String, Object> loginForWX(@RequestBody User user) {
+        ResultModel<User> result = new ResultModel<>();
+        Long mobile = user.getMobile();
+        String password =user.getPassword();
+
+        if(mobile == null && password == null ){
+            result.setReturnMessage("手机号或密码不能为空");
+            result.setReturnCode(XbaseError.FALL_TO_USERINFO.getErrorCode());
+        }else {
+            User resultInfo = userService.loginForWX(user);
+            if(resultInfo != null){
+                result.setData(resultInfo);
+            }else {
+                result.setReturnMessage("账号或者密码错误");
+                result.setReturnCode(XbaseError.FALL_TO_USERINFO.getErrorCode());
+            }
+        }
+        return result.dump();
+    }
+
+    @RequestMapping(value = "/loginForFC", method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String, Object> loginForFC(@RequestBody User user) {
+        ResultModel<User> result = new ResultModel<>();
+
+
+        return result.dump();
     }
 }

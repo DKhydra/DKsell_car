@@ -125,6 +125,15 @@
   </delete>
 
 
+  <select id="selectUserForLogin" resultMap="BaseResultMap" parameterType="com.fnzb.dao.entity.User">
+    select
+    <include refid="Base_Column_List" />
+    from sc_user
+    where
+    mobile = #{mobile,jdbcType=BIGINT} and password = #{password,jdbcType=VARCHAR}
+  </select>
+
+
   <insert id="insert" parameterType="com.fnzb.dao.entity.event.UserAddEvent" >
     insert into sc_user (open_id,mobile,password,gmt_create)
     values (#{openId,jdbcType=VARCHAR},#{mobile,jdbcType=BIGINT},#{password,jdbcType=VARCHAR},

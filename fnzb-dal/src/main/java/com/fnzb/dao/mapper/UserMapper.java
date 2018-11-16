@@ -27,5 +27,7 @@ public interface UserMapper {
 
     int verifyMobile(@Param("mobile") Long mobile);
 
+    User selectUserForLogin(User user);
+
 
 }

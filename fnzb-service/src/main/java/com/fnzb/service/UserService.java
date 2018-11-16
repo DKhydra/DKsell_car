@@ -73,4 +73,10 @@ public interface UserService {
     boolean verifyMobile(Long mobile);
 
 
+    /**
+     * pc 端登录
+     * @param user
+     * @return
+     */
+    User loginForWX(User user);
 }

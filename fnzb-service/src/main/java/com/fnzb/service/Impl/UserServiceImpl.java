@@ -99,4 +99,9 @@ public class UserServiceImpl implements UserService {
         }
         return flag;
     }
+
+    @Override
+    public User loginForWX(User user) {
+        return userMapper.selectUserForLogin(user);
+    }
 }

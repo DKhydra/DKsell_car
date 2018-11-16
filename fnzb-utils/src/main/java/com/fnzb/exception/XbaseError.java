@@ -31,7 +31,8 @@ public enum XbaseError {
 	FAIL_TO_DELETE("FTD0001","删除失败"),
 	FAIL_TO_ADD("FTD0002","添加失败"),
 	FAIL_TO_MODIFY("FTD0003","修改失败"),
-	FAIL_TO_SELECT("FTD0003","未存在"),
+	FAIL_TO_SELECT("FTD0004","未存在"),
+	FALL_TO_USERINFO("FTD0005","用户信息错误"),
 
 	SYS_ERROR("X0110001", "System internal error."),
 	SYS_NPE_ERROR("X0110002", "System error, no data returned."),
