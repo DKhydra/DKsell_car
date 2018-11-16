@@ -1,7 +1,8 @@
 package com.fnzb.service;
 
-import com.aliyuncs.exceptions.ClientException;
+
 import com.fnzb.dao.entity.User;
+import com.fnzb.dao.entity.event.UserAddEvent;
 import com.fnzb.dao.entity.event.UserEvent;
 import org.apache.ibatis.annotations.Param;
 
@@ -17,10 +18,10 @@ public interface UserService {
 
     /**
      * 注册用户 注册信息 手机号 openId
-     * @param user
+     * @param userAddEvent
      * @return
      */
-    boolean addUser (User user);
+    boolean addUser (UserAddEvent userAddEvent);
 
     /**
      * 根据openId 进行查询

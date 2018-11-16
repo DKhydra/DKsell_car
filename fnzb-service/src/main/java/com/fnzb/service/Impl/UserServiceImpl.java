@@ -1,17 +1,19 @@
 package com.fnzb.service.Impl;
 
-import com.aliyuncs.exceptions.ClientException;
+
 import com.fnzb.dao.entity.User;
+import com.fnzb.dao.entity.event.UserAddEvent;
 import com.fnzb.dao.entity.event.UserEvent;
 import com.fnzb.dao.mapper.UserMapper;
 import com.fnzb.service.UserService;
 
-import com.fnzb.utils.SendMessage;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 
+import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.List;
 
@@ -35,10 +37,11 @@ public class UserServiceImpl implements UserService {
     }
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public boolean addUser(User user) {
-        user.setGmtCreate(new Date());
+    public boolean addUser(UserAddEvent userAddEvent) {
+
+        userAddEvent.setGmtCreate(new Date());
         boolean flag = false ;
-        int result = userMapper.insert(user);
+        int result = userMapper.insert(userAddEvent);
         if (result == 1 ) {
             flag = true;
         }

@@ -125,7 +125,7 @@
   </delete>
 
 
-  <insert id="insert" parameterType="com.fnzb.dao.entity.User" >
+  <insert id="insert" parameterType="com.fnzb.dao.entity.event.UserAddEvent" >
     insert into sc_user (open_id,mobile,password,gmt_create)
     values (#{openId,jdbcType=VARCHAR},#{mobile,jdbcType=BIGINT},#{password,jdbcType=VARCHAR},
       #{gmtCreate,jdbcType=TIMESTAMP})

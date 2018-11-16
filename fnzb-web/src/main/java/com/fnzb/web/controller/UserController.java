@@ -1,6 +1,8 @@
 package com.fnzb.web.controller;
 
+import com.aliyuncs.exceptions.ClientException;
 import com.fnzb.dao.entity.User;
+import com.fnzb.dao.entity.event.UserAddEvent;
 import com.fnzb.dao.entity.event.UserEvent;
 import com.fnzb.exception.XbaseError;
 import com.fnzb.result.ResultModel;
@@ -16,8 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.List;
-import java.util.Map;
+import javax.servlet.http.HttpSession;
+import java.util.*;
 
 @Controller
 @RequestMapping(value = "/user")
@@ -43,20 +45,51 @@ public class UserController {
         }
         return result.dump();
     }
+
     @RequestMapping(value = "/addUser", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, Object> addUser(@RequestBody User user) {
+    public Map<String, Object> addUser(@RequestBody UserAddEvent userAddEvent, final HttpSession session) throws ClientException {
         ResultModel<Boolean> result = new ResultModel<>();
-        boolean resultInfo =userService.addUser(user);
-        if (resultInfo == true  ){
-            result.setReturnMessage("添加成功");
-            result.setReturnCode("000000");
+        // 根据输入手机获取session中是否存在 手机号
+        String sessionInfo = (String) session.getAttribute(String.valueOf(userAddEvent.getMobile()));
+        // 如果没有的 为用户第一次登录 进行发送验证功能
+        if (sessionInfo == null) {
+            // 把用户手机号存放 session 用来验证多次验证
+            final String modile =String.valueOf(userAddEvent.getMobile());
+            session.setAttribute(modile,userAddEvent.getMobile());
+            try {
+                //TimerTask实现5分钟后从session中删除checkCode
+                final Timer timer=new Timer();
+                timer.schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        session.removeAttribute(modile);
+                        System.out.println("checkCode删除成功");
+                        timer.cancel();
+                    }
+                },5*60*1000);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+           if (userAddEvent.getVerifyCode() == session.getAttribute("verifyCode")) {
+
+               boolean resultInfo =userService.addUser(userAddEvent);
+               if (resultInfo == true  ){
+                   result.setReturnMessage("添加成功");
+                   result.setReturnCode("000000");
+               }else {
+                   result.setReturnMessage("添加失败");
+                   result.setReturnCode(XbaseError.FAIL_TO_ADD.getErrorCode());
+               }
+           }
+
         }else {
-            result.setReturnMessage("添加失败");
-            result.setReturnCode(XbaseError.FAIL_TO_ADD.getErrorCode());
+            result.setReturnMessage("验证码已发送");
         }
         return result.dump();
     }
+
+
     @RequestMapping(value = "/selectUserByOpenId", method = RequestMethod.GET)
     @ResponseBody
     public Map<String, Object> selectUserByOpenId(String openId) {
@@ -70,6 +103,34 @@ public class UserController {
         }
         return result.dump();
     }
+
+    @RequestMapping(value = "/getVerifyCode", method = RequestMethod.GET)
+    @ResponseBody
+    public String getVerifyCode(@RequestBody UserAddEvent userAddEvent,final HttpSession session) throws ClientException{
+        // 获取验证码
+        final String verifyCode = String.valueOf(new Random().nextInt(899999) + 100000);
+        // 发送短信
+        SendMessage.sendSms(userAddEvent.getMobile(),verifyCode);
+
+        session.setAttribute("verifyCode",verifyCode);
+        try {
+            //TimerTask实现1分钟后从session中删除verifyCode
+            final Timer timer=new Timer();
+            timer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    session.removeAttribute("verifyCode");
+                    timer.cancel();
+                }
+            },1*60*1000);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+        return verifyCode;
+    }
+
     @RequestMapping(value = "/selectUserByMobile", method = RequestMethod.GET)
     @ResponseBody
     public Map<String, Object> selectUserByMobile(Long mobile) {
@@ -83,6 +144,8 @@ public class UserController {
         }
         return result.dump();
     }
+
+
     @RequestMapping(value = "/selectUserAll", method = RequestMethod.GET)
     @ResponseBody
     public Map<String, Object> selectUserAll(@RequestBody UserEvent userEvent) {
@@ -101,6 +164,7 @@ public class UserController {
         }
         return result.dump();
     }
+
 
     @RequestMapping(value = "/verifyIdNumber", method = RequestMethod.GET)
     @ResponseBody
@@ -133,4 +197,9 @@ public class UserController {
         return result.dump();
     }
 
+    @RequestMapping(value = "/loginForPc", method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String, Object> loginForPc(User user) {
+        return null;
+    }
 }

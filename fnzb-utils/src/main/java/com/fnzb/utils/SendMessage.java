@@ -47,7 +47,7 @@ public class SendMessage {
      * @return
      * @throws ClientException
      */
-    public static SendSmsResponse sendSms(Long mobile, HttpSession session) throws ClientException {
+    public static SendSmsResponse sendSms(Long mobile,String verifyCode) throws ClientException {
         //将手机号转换为字符串
         String Mobile = String.valueOf(mobile);
         //可自助调整超时时间
@@ -67,11 +67,8 @@ public class SendMessage {
         request.setTemplateCode(TemplateCode);
         //可选:模板中的变量替换JSON串,如模板内容为"亲爱的${name},您的验证码为${code}"时,此处的值为
         // request.setTemplateParam("{\"name\":\"Tom\", \"code\":\"123\"}");
-        String verifyCode = String.valueOf(new Random().nextInt(899999) + 100000);
+        //String verifyCode = String.valueOf(new Random().nextInt(899999) + 100000);
         request.setTemplateParam("{\"code\":\""+verifyCode+"\"}");
-        session.setAttribute("verifyCode",verifyCode);
-        //120秒验证码失效
-        session.setMaxInactiveInterval(2*60);
         //选填-上行短信扩展码(无特殊需求用户请忽略此字段)
         //request.setSmsUpExtendCode("90997");
         //可选:outId为提供给业务方扩展字段,最终在短信回执消息中将此值带回给调用者

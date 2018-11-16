@@ -6,6 +6,10 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="fnzb-dal" />
+        <module name="fnzb-service" />
+        <module name="fnzb-util" />
+        <module name="fnzb-web" />
         <module name="fnzbdal" />
         <module name="fnzbservice" />
         <module name="fnzbutil" />

@@ -1,6 +1,9 @@
 package com.fnzb.dao.entity.event;
 
-public class UserAddEvent {
+import java.io.Serializable;
+import java.util.Date;
+
+public class UserAddEvent implements Serializable {
 
     private Long mobile;
 
@@ -9,6 +12,19 @@ public class UserAddEvent {
     private String password;
 
     private String verifyCode;
+
+    private Date gmtCreate;
+
+    private static final long serialVersionUID = 1L;
+
+
+    public Date getGmtCreate() {
+        return gmtCreate;
+    }
+
+    public void setGmtCreate(Date gmtCreate) {
+        this.gmtCreate = gmtCreate;
+    }
 
     public Long getMobile() {
         return mobile;
